@@ -89,7 +89,7 @@ UI["f"]["Name"] = [[setData]]
 
 -- // StarterGui.AutoGui.data.TargetSurface \\ --
 UI["10"] = Instance.new("Texture", UI["c"])
-UI["10"]["Face"] = Enum.NormalId.Back
+UI["10"]["Face"] = Enum.NormalId.Front
 UI["10"]["Name"] = [[TargetSurface]]
 
 -- Require G2L wrapper
@@ -296,10 +296,10 @@ local script = UI["f"]
 			return nil
 		end
 		local f = script.Parent.Parent:WaitForChild("posM")
-		if script.Parent.Target and script.Parent.Position3d and script.Parent.TargetSurface then
-		else
-			return nil
-		end
+		--if script.Parent.Target and script.Parent.Position3d and script.Parent.TargetSurface then
+		--else
+		--	return nil
+		--end
 		if module:getMouseTargetScale(f)[1].Name == "Block" then
 			script.Parent.Target.Value,script.Parent.Position3d.Value = module:getMouseTargetScale(f)
 		end
