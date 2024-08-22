@@ -297,14 +297,14 @@ local function SCRIPT_f()
 	local module = require(script.Parent.Parent:WaitForChild("ModuleScript"))
 	game["Run Service"].RenderStepped:Connect(function()
 		local f = UI["2"]
-		if module:getMouseTargetScale(f) ~= nil and module:getMouseTargetScale(f)[1].Name == "Block" then
-			script.Parent.Target.Value,script.Parent.Position3d.Value = module:getMouseTargetScale(f)[1],module:getMouseTargetScale(f)[2]
+		if module:getMouseTargetScale(f) ~= nil and module:getMouseTargetScale(f)[1]:IsA("Part") then
+			UI["e"].Value,UI["d"].Value = module:getMouseTargetScale(f)[1],module:getMouseTargetScale(f)[2]
 		end
 		local face = module:getTargetSurface(module:getMouseTargetScale(f)[1],module:getMouseTargetScale(f)[2])
 		if face == nil then
 			return nil
 		end
-		script.Parent.TargetSurface.Face = face
+		UI["10"].Face = face
 	end)
 end
 task.spawn(SCRIPT_f)
