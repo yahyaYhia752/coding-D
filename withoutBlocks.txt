@@ -1,14 +1,20 @@
 -- // GUI TO LUA \\ --
-
+repeat wait() until game:IsLoaded()
+if _G.AutoClickerSkywars == true then
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("AutoGui"):Destroy()
+end
+_G.AutoClickerSkywars = true
 -- // INSTANCES: 16 | SCRIPTS: 2 | MODULES: 1 \\ --
-cooldown = .01
+cooldown = Instance.new("NumberValue")
+cooldown.Value = 0
 local UI = {}
 
+-- wait(.1)
 -- // StarterGui.AutoGui \\ --
-UI["1"] = Instance.new("ScreenGui", game.CoreGui)
+UI["1"] = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
 UI["1"]["Name"] = [[AutoGui]]
 UI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
-
+UI["1"]["ResetOnSpawn"] = false
 -- // StarterGui.AutoGui.posM \\ --
 UI["2"] = Instance.new("Frame", UI["1"])
 UI["2"]["BackgroundTransparency"] = 1
@@ -93,6 +99,59 @@ UI["f"]["Name"] = [[setData]]
 UI["10"] = Instance.new("Texture", UI["c"])
 UI["10"]["Face"] = Enum.NormalId.Front
 UI["10"]["Name"] = [[TargetSurface]]
+
+-- // StarterGui.AutoGui.count \\ --
+UI["11"] = Instance.new("Frame", UI["1"])
+UI["11"]["BorderSizePixel"] = 0
+UI["11"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
+UI["11"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["11"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
+UI["11"]["Position"] = UDim2.new(0, 40, 0.2, 0)
+UI["11"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["11"]["Name"] = "count"
+
+-- // StarterGui.AutoGui.count.F \\ --
+UI["12"] = Instance.new("TextBox", UI["11"])
+UI["12"]["BorderSizePixel"] = 0
+UI["12"]["TextSize"] = 14
+UI["12"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+UI["12"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["12"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["12"]["Size"] = UDim2.new(1, 0, 1, 0)
+UI["12"]["BackgroundTransparency"] = 1
+UI["12"]["Name"] = [[F]]
+UI["12"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["12"]["Text"] = ":سرعه".. cooldown.Value*100
+
+-- // StarterGui.AutoGui.count.UIAspectRatioConstraint \\ --
+UI["13"] = Instance.new("UIAspectRatioConstraint", UI["11"])
+UI["13"]["AspectRatio"] = 1.64673
+
+-- // StarterGui.AutoGui.count.UICorner \\ --
+UI["15"] = Instance.new("UICorner", UI["11"])
+
+
+-- // StarterGui.AutoGui.auto.UIStroke \\ --
+UI["16"] = Instance.new("UIStroke", UI["11"])
+UI["16"]["Thickness"] = 1.5
+UI["16"]["Color"] = Color3.fromRGB(20, 83, 154)
+
+--Change Speed
+task.spawn(function()
+	txtbox = UI["12"]
+	txtbox.FocusLost:Connect(function()
+		txt = txtbox.Text
+		if tonumber(txt)/100 <= 0 then
+			return nil
+		end
+		cooldown.Value = tonumber(txt)/100
+		UI["11"].Visible = false
+	end)
+end)
+
+
+repeat wait() until cooldown.Value ~= 0
+
 
 -- Require G2L wrapper
 local G2L_REQUIRE = require;
@@ -188,10 +247,9 @@ G2L_MODULES[UI["b"]] = {
 					[1] = game.Players.LocalPlayer.PlayerGui:WaitForChild("B").Adornee
 				}
 				game:GetService("Players").LocalPlayer.Character.Axe.RemoteEvent:FireServer(unpack(args))
-
+				tool:Activate()
 			elseif tool.Name == "Block" then
-				-- nothing to do until now :D
-				return 
+				repeat task.wait() until tool.Name ~= "Block"
 			elseif tool:FindFirstChild("drink") then -- any poitons
 				tool:Activate()
 			elseif tool.Name == "Shield" then -- Shield
@@ -257,7 +315,7 @@ local function SCRIPT_4()
 
 	-- loop
 	task.spawn(function()
-		while task.wait(cooldown) do
+		while task.wait(cooldown.Value) do
 			if auto.Start.Value then
 				-- function click
 				Module:Click()
