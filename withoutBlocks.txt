@@ -230,7 +230,7 @@ function z:Click()
 		tool:Activate()
 	end	
 	if tool.Name == "Block" then
-		tool:Activate()
+		tool:Activate() -- lool
 	end	
 	if tool:FindFirstChild("drink") then -- any poitons
 		tool:Activate()
