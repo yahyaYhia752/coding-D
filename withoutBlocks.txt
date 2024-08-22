@@ -5,7 +5,7 @@
 local UI = {}
 
 -- // StarterGui.AutoGui \\ --
-UI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
+UI["1"] = Instance.new("ScreenGui", game.CoreGui)
 UI["1"]["Name"] = [[AutoGui]]
 UI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
 
@@ -169,7 +169,7 @@ G2L_MODULES[UI["b"]] = {
 		function z:Click()
 			local range = 99e9
 			local player = game.Players.LocalPlayer
-			local tool = player.Character and player.Character:FindFirstChildOfClass("Tool")
+			local tool = player.Character:FindFirstChildOfClass("Tool")
 			if tool == nil then return end
 			local FolderD = script.Parent:WaitForChild("data")
 			local p = game.Players:GetPlayers()
@@ -253,7 +253,7 @@ local function SCRIPT_4()
 	-- loop
 	task.spawn(function()
 		while task.wait() do
-			if auto.Start.Value == true then
+			if auto.Start.Value then
 				-- function click
 				Module:Click()
 			end
