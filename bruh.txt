@@ -292,11 +292,7 @@ local function SCRIPT_f()
 	local script = UI["f"]
 	local module = require(script.Parent.Parent:WaitForChild("ModuleScript"))
 	game["Run Service"].RenderStepped:Connect(function()
-		local f = script.Parent.Parent:WaitForChild("posM")
-		--if script.Parent.Target and script.Parent.Position3d and script.Parent.TargetSurface then
-		--else
-		--	return nil
-		--end
+		local f = UI["2"]
 		if module:getMouseTargetScale(f)[1].Name == "Block" then
 			script.Parent.Target.Value,script.Parent.Position3d.Value = module:getMouseTargetScale(f)
 		end
