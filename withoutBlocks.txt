@@ -230,7 +230,7 @@ function z:Click()
 		tool:Activate()
 	end	
 	if tool.Name == "Block" then
-		-- we should do this function but untill now idk :D how
+		tool:Activate()
 	end	
 	if tool:FindFirstChild("drink") then -- any poitons
 		tool:Activate()
