@@ -187,8 +187,7 @@ G2L_MODULES[UI["b"]] = {
 					end
 				end
 			elseif tool.Name == "Block" then
-				if FolderD:FindFirstChild("Target").Value == nil then return nil end
-				if FolderD:FindFirstChild("Position3d").Value == nil then return nil end
+				--if FolderD:FindFirstChild("Target").Value == nil then return nil end
 				--if  == nil then return nil end
 				local BlockPos1 = FolderD:WaitForChild("Target").Value.Position
 				local FaceStr = FolderD:FindFirstChild("TargetSurface").Face.Name
@@ -207,9 +206,9 @@ G2L_MODULES[UI["b"]] = {
 					newblockPos = BlockPos1 + Vector3.new(0, 4, 0)
 				end
 				local args = {
-					[1] = newblockPos, -- block position
-					[2] = FolderD:FindFirstChild("TargetSurface").Face, -- face position
-					[3] = BrickColor.new(math.random(0,365)), -- Color block Ig
+					[1] = newblockPos, 
+					[2] = FolderD:FindFirstChild("TargetSurface").Face,
+					[3] = BrickColor.new(math.random(0,365)), 
 					[4] = true -- idk :D
 				}
 				game:GetService("Players").LocalPlayer.Character.Block.RemoteFunction:InvokeServer(unpack(args))
@@ -298,7 +297,9 @@ local function SCRIPT_f()
 		else
 			return nil
 		end
-		script.Parent.Target.Value,script.Parent.Position3d.Value = module:getMouseTargetScale(f)
+		if module:getMouseTargetScale(f)[1].Name == "Block" then
+			script.Parent.Target.Value,script.Parent.Position3d.Value = module:getMouseTargetScale(f)
+		end
 		local face = module:getTargetSurface(module:getMouseTargetScale(f))
 		if face == nil then
 			return nil
