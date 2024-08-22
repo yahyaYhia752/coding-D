@@ -9,19 +9,19 @@ UI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitF
 UI["1"]["Name"] = [[AutoGui]]
 UI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
 
--- // StarterGui.AutoGui.posM \\ --
-UI["2"] = Instance.new("Frame", UI["1"])
-UI["2"]["BorderSizePixel"] = 0
-UI["2"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
-UI["2"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
-UI["2"]["Size"] = UDim2.new(0, 7, 0, 7)
-UI["2"]["Position"] = UDim2.new(0.5, 0, 0.5, 0)
-UI["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["2"]["Name"] = [[posM]]
+---- // StarterGui.AutoGui.posM \\ --
+--UI["2"] = Instance.new("Frame", UI["1"])
+--UI["2"]["BorderSizePixel"] = 0
+--UI["2"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
+--UI["2"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+--UI["2"]["Size"] = UDim2.new(0, 7, 0, 7)
+--UI["2"]["Position"] = UDim2.new(0.5, 0, 0.5, 0)
+--UI["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+--UI["2"]["Name"] = [[posM]]
 
--- // StarterGui.AutoGui.posM.UIStroke \\ --
-UI["3"] = Instance.new("UIStroke", UI["2"])
-UI["3"]["Thickness"] = 1.5
+---- // StarterGui.AutoGui.posM.UIStroke \\ --
+--UI["3"] = Instance.new("UIStroke", UI["2"])
+--UI["3"]["Thickness"] = 1.5
 
 -- // StarterGui.AutoGui.LocalScript \\ --
 UI["4"] = Instance.new("LocalScript", UI["1"])
@@ -205,7 +205,7 @@ local function SCRIPT_4()
 	local p = game.Players.LocalPlayer
 	m = p:GetMouse()
 	local screen = script.Parent
-	local posM = screen.posM
+	--local posM = screen.posM
 	local auto= screen.auto
 	local Module = require(script.Parent:WaitForChild("ModuleScript"))
 	local D = {
@@ -213,11 +213,11 @@ local function SCRIPT_4()
 		ColorOff = Color3.fromRGB(170, 87, 88);
 	}
 	-- pos mouse
-	task.spawn(function()
-		game["Run Service"].RenderStepped:Connect(function()
-			posM.Position = UDim2.new(0,m.X,0,m.Y)
-		end)
-	end)
+	--task.spawn(function()
+	--	game["Run Service"].RenderStepped:Connect(function()
+	--		posM.Position = UDim2.new(0,m.X,0,m.Y)
+	--	end)
+	--end)
 	-- if mouse click
 	task.spawn(function()
 		auto.F.MouseButton1Down:Connect(function()
@@ -231,10 +231,10 @@ local function SCRIPT_4()
 		local function updateColors(v)
 			if v then
 				game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
-				game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
+				--game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
 			else
 				game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.ColorOff}):Play()
-				game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.ColorOff}):Play()
+				--game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.ColorOff}):Play()
 			end
 		end
 		local v = false
