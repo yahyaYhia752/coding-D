@@ -1,23 +1,25 @@
--- // GUI TO LUA \\ --
 repeat wait() until game:IsLoaded()
-if _G.AutoClickerSkywars == true then
+print("Loaded!!")
+
+
+if _G.AutoClickerStart_Welp then
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("AutoGui"):Destroy()
 end
-_G.AutoClickerSkywars = true
--- // INSTANCES: 16 | SCRIPTS: 2 | MODULES: 1 \\ --
-cooldown = Instance.new("NumberValue")
-cooldown.Value = 0
+_G.AutoClickerStart_Welp = true
+
+-- // INSTANCES: 19 | SCRIPTS: 1 | MODULES: 1 \\ --
+
 local UI = {}
 
--- wait(.1)
 -- // StarterGui.AutoGui \\ --
-UI["1"] = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
+UI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
 UI["1"]["Name"] = [[AutoGui]]
 UI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
 UI["1"]["ResetOnSpawn"] = false
+
 -- // StarterGui.AutoGui.posM \\ --
 UI["2"] = Instance.new("Frame", UI["1"])
-UI["2"]["BackgroundTransparency"] = 1
+UI["2"]["Visible"] = false
 UI["2"]["BorderSizePixel"] = 0
 UI["2"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
 UI["2"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
@@ -29,7 +31,6 @@ UI["2"]["Name"] = [[posM]]
 -- // StarterGui.AutoGui.posM.UIStroke \\ --
 UI["3"] = Instance.new("UIStroke", UI["2"])
 UI["3"]["Thickness"] = 1.5
-UI["3"]["Transparency"] = 1
 
 -- // StarterGui.AutoGui.LocalScript \\ --
 UI["4"] = Instance.new("LocalScript", UI["1"])
@@ -56,7 +57,7 @@ UI["6"]["Size"] = UDim2.new(1, 0, 1, 0)
 UI["6"]["BackgroundTransparency"] = 1
 UI["6"]["Name"] = [[F]]
 UI["6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["6"]["Text"] = "اوتو :]"
+UI["6"]["Text"] = [[اوتو (:]]
 
 -- // StarterGui.AutoGui.auto.UIAspectRatioConstraint \\ --
 UI["7"] = Instance.new("UIAspectRatioConstraint", UI["5"])
@@ -73,7 +74,7 @@ UI["9"] = Instance.new("UICorner", UI["5"])
 -- // StarterGui.AutoGui.auto.UIStroke \\ --
 UI["a"] = Instance.new("UIStroke", UI["5"])
 UI["a"]["Thickness"] = 1.5
-UI["a"]["Color"] = Color3.fromRGB(86, 171, 128)
+UI["a"]["Color"] = Color3.fromRGB(107, 107, 107)
 
 -- // StarterGui.AutoGui.ModuleScript \\ --
 UI["b"] = Instance.new("ModuleScript", UI["1"])
@@ -83,186 +84,168 @@ UI["b"] = Instance.new("ModuleScript", UI["1"])
 UI["c"] = Instance.new("Folder", UI["1"])
 UI["c"]["Name"] = [[data]]
 
--- // StarterGui.AutoGui.data.Position3d \\ --
-UI["d"] = Instance.new("Vector3Value", UI["c"])
-UI["d"]["Name"] = [[Position3d]]
+-- // StarterGui.AutoGui.data.Speed \\ --
+UI["d"] = Instance.new("NumberValue", UI["c"])
+UI["d"]["Name"] = [[Speed]]
 
--- // StarterGui.AutoGui.data.Target \\ --
-UI["e"] = Instance.new("ObjectValue", UI["c"])
-UI["e"]["Name"] = [[Target]]
+-- // StarterGui.AutoGui.SetSpeed \\ --
+UI["e"] = Instance.new("Frame", UI["1"])
+UI["e"]["BorderSizePixel"] = 0
+UI["e"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
+UI["e"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["e"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
+UI["e"]["Position"] = UDim2.new(0, 40, 0.2, 0)
+UI["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["e"]["Name"] = [[SetSpeed]]
 
--- // StarterGui.AutoGui.data.setData \\ --
-UI["f"] = Instance.new("LocalScript", UI["c"])
-UI["f"]["Name"] = [[setData]]
+-- // StarterGui.AutoGui.SetSpeed.UIAspectRatioConstraint \\ --
+UI["f"] = Instance.new("UIAspectRatioConstraint", UI["e"])
+UI["f"]["AspectRatio"] = 1.64673
 
--- // StarterGui.AutoGui.data.TargetSurface \\ --
-UI["10"] = Instance.new("Texture", UI["c"])
-UI["10"]["Face"] = Enum.NormalId.Front
-UI["10"]["Name"] = [[TargetSurface]]
+-- // StarterGui.AutoGui.SetSpeed.UICorner \\ --
+UI["10"] = Instance.new("UICorner", UI["e"])
 
--- // StarterGui.AutoGui.count \\ --
-UI["11"] = Instance.new("Frame", UI["1"])
-UI["11"]["BorderSizePixel"] = 0
-UI["11"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
-UI["11"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
-UI["11"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
-UI["11"]["Position"] = UDim2.new(0, 40, 0.2, 0)
-UI["11"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["11"]["Name"] = "count"
 
--- // StarterGui.AutoGui.count.F \\ --
-UI["12"] = Instance.new("TextBox", UI["11"])
+-- // StarterGui.AutoGui.SetSpeed.UIStroke \\ --
+UI["11"] = Instance.new("UIStroke", UI["e"])
+UI["11"]["Thickness"] = 1.5
+UI["11"]["Color"] = Color3.fromRGB(0, 86, 255)
+
+-- // StarterGui.AutoGui.SetSpeed.TextBox \\ --
+UI["12"] = Instance.new("TextBox", UI["e"])
+UI["12"]["CursorPosition"] = -1
+UI["12"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
 UI["12"]["BorderSizePixel"] = 0
 UI["12"]["TextSize"] = 14
-UI["12"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
 UI["12"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
 UI["12"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 UI["12"]["Size"] = UDim2.new(1, 0, 1, 0)
-UI["12"]["BackgroundTransparency"] = 1
-UI["12"]["Name"] = [[F]]
 UI["12"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["12"]["Text"] = ":سرعه".. cooldown.Value*100
+UI["12"]["Text"] = [[حط السرعه اول (:]]
+UI["12"]["BackgroundTransparency"] = 1
 
--- // StarterGui.AutoGui.count.UIAspectRatioConstraint \\ --
-UI["13"] = Instance.new("UIAspectRatioConstraint", UI["11"])
-UI["13"]["AspectRatio"] = 1.64673
-
--- // StarterGui.AutoGui.count.UICorner \\ --
-UI["15"] = Instance.new("UICorner", UI["11"])
-
-
--- // StarterGui.AutoGui.auto.UIStroke \\ --
-UI["16"] = Instance.new("UIStroke", UI["11"])
-UI["16"]["Thickness"] = 1.5
-UI["16"]["Color"] = Color3.fromRGB(20, 83, 154)
-
---Change Speed
-task.spawn(function()
-	txtbox = UI["12"]
-	txtbox.FocusLost:Connect(function()
-		txt = txtbox.Text
-		if tonumber(txt)/100 <= 0 then
-			return nil
-		end
-		cooldown.Value = tonumber(txt)/100
-		UI["11"].Visible = false
-	end)
-end)
-
-
-repeat wait() until cooldown.Value ~= 0
-
+-- // StarterGui.AutoGui.eqTool \\ --
+UI["13"] = Instance.new("ObjectValue", UI["1"])
+UI["13"]["Name"] = [[eqTool]]
 
 -- Require G2L wrapper
 local G2L_REQUIRE = require;
 local G2L_MODULES = {};
 local function require(Module:ModuleScript)
-	local ModuleState = G2L_MODULES[Module];
-	if ModuleState then
-		if not ModuleState.Required then
-			ModuleState.Required = true;
-			ModuleState.Value = ModuleState.Closure();
-		end
-		return ModuleState.Value;
-	end;
-	return G2L_REQUIRE(Module);
+    local ModuleState = G2L_MODULES[Module];
+    if ModuleState then
+        if not ModuleState.Required then
+            ModuleState.Required = true;
+            ModuleState.Value = ModuleState.Closure();
+        end
+        return ModuleState.Value;
+    end;
+    return G2L_REQUIRE(Module);
 end
 
 G2L_MODULES[UI["b"]] = {
-	Closure = function()
-		local script = UI["b"]
-		local z = {}
-		local plr = game.Players.LocalPlayer
-		local Cam = workspace.CurrentCamera
-		m = plr:GetMouse()
-		function z:getMouseTargetScale(frame)
-			local x,y = m.ViewSizeX * frame.Position.X.Scale,m.ViewSizeY * frame.Position.Y.Scale 
-			local mousePos = Vector2.new(x, y)
-			local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
-			local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
-			local part, position = workspace:FindPartOnRay(ray, plr.Character)
+Closure = function()
+    local script = UI["b"]
+local z = {}
+local plr = game.Players.LocalPlayer
+local Cam = workspace.CurrentCamera
+m = plr:GetMouse()
+function z:getMouseTargetScale(frame)
+	local x,y = m.ViewSizeX * frame.Position.X.Scale,m.ViewSizeY * frame.Position.Y.Scale 
+	local mousePos = Vector2.new(x, y)
+	local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
+	local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
+	local part, position = workspace:FindPartOnRay(ray, plr.Character)
 
-			return {part, position}
-		end
-		function z:getMouseTargetOffset(frame:Frame)
-			local x,y = frame.Position.X.Offset,frame.Position.Y.Offset
-			local mousePos = Vector2.new(x, y)
-			local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
-			local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
-			local part, position = workspace:FindPartOnRay(ray, plr.Character)
+	return {part, position}
+end
+function z:getMouseTargetOffset(frame:Frame)
+	local x,y = frame.Position.X.Offset,frame.Position.Y.Offset
+	local mousePos = Vector2.new(x, y)
+	local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
+	local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
+	local part, position = workspace:FindPartOnRay(ray, plr.Character)
 
-			return {part, position}
-		end
-		function z:getTargetSurface(part, position)
-			if part == nil then
-				return nil
-			end
-			local partSize = part.Size
-			local partPosition = part.Position
-
-			local difference = position - partPosition
-
-			local absDifference = Vector3.new(math.abs(difference.X), math.abs(difference.Y), math.abs(difference.Z))
-
-			if absDifference.X > absDifference.Y and absDifference.X > absDifference.Z then
-				if difference.X > 0 then
-					return Enum.NormalId.Right
-				else
-					return Enum.NormalId.Left
-				end
-			elseif absDifference.Y > absDifference.X and absDifference.Y > absDifference.Z then
-				if difference.Y > 0 then
-					return Enum.NormalId.Top
-				else
-					return Enum.NormalId.Bottom
-				end
-			else
-				if difference.Z > 0 then
-					return Enum.NormalId.Front
-				else
-					return Enum.NormalId.Back
-				end
-			end
-		end
-
-		function z:Click()
-			local range = 99e9
-			local player = game.Players.LocalPlayer
-			local tool = player.Character:FindFirstChildOfClass("Tool")
-			if tool == nil then return end
-			local FolderD = script.Parent:WaitForChild("data")
-			local p = game.Players:GetPlayers()
-			if tool.Name == "Sword" then --Sword Auto
-				tool:Activate()
-			elseif tool.Name == "Bow" then --Bow Auto
-				game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(true)
-				wait()
-				game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(false)
-			elseif tool.Name == "Axe" then -- Pickaxe Auto
-				if FolderD:FindFirstChild("Target").Value == nil then return nil end
-				if game.Players.LocalPlayer.PlayerGui:WaitForChild("B").Adornee == nil then
-					return 
-				end
-				local args = {
-					[1] = game.Players.LocalPlayer.PlayerGui:WaitForChild("B").Adornee
-				}
-				game:GetService("Players").LocalPlayer.Character.Axe.RemoteEvent:FireServer(unpack(args))
-				tool:Activate()
-			elseif tool.Name == "Block" then
-				repeat task.wait() until tool.Name ~= "Block"
-			elseif tool:FindFirstChild("drink") then -- any poitons
-				tool:Activate()
-			elseif tool.Name == "Shield" then -- Shield
-				tool:Activate()
-			end
-		end
-		return z
-
+	return {part, position}
+end
+function z:getTargetSurface(part, position)
+	if part == nil then
+		return nil
 	end
+	local partSize = part.Size
+	local partPosition = part.Position
+
+	local difference = position - partPosition
+
+	local absDifference = Vector3.new(math.abs(difference.X), math.abs(difference.Y), math.abs(difference.Z))
+
+	if absDifference.X > absDifference.Y and absDifference.X > absDifference.Z then
+		if difference.X > 0 then
+			return Enum.NormalId.Right
+		else
+			return Enum.NormalId.Left
+		end
+	elseif absDifference.Y > absDifference.X and absDifference.Y > absDifference.Z then
+		if difference.Y > 0 then
+			return Enum.NormalId.Top
+		else
+			return Enum.NormalId.Bottom
+		end
+	else
+		if difference.Z > 0 then
+			return Enum.NormalId.Front
+		else
+			return Enum.NormalId.Back
+		end
+	end
+end
+
+function z:Click()
+	local range = 99e9
+	local player = game.Players.LocalPlayer
+	local tool = script.Parent.eqTool.Value
+	if tool == nil then return end
+	print(tool.Name)
+	local FolderD = script.Parent:WaitForChild("data")
+	local p = game.Players:GetPlayers()
+	
+	if tool.Name == "Sword" then --Sword Auto
+		tool:Activate()
+	end
+	
+	if tool.Name == "Bow" then --Bow Auto
+		task.spawn(function() -- to cancel waiting
+			game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(true)		
+			game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(false)
+		end)
+	end	
+	if tool.Name == "Axe" then -- Pickaxe Auto
+		if game.Players.LocalPlayer:GetMouse().Target == nil then
+			return 
+		end
+		local args = {
+			[1] = game.Players.LocalPlayer:GetMouse().Target
+		}
+		game:GetService("Players").LocalPlayer.Character.Axe.RemoteEvent:FireServer(unpack(args))
+		tool:Activate()
+	end	
+	if tool.Name == "Block" then
+		-- we should do this function but untill now idk :D how
+	end	
+	if tool:FindFirstChild("drink") then -- any poitons
+		tool:Activate()
+	end	
+	if tool.Name == "Shield" then -- Shield
+		tool:Activate()
+	end
+end
+return z
+
+end
 }
 -- // StarterGui.AutoGui.LocalScript \\ --
 local function SCRIPT_4()
-	local script = UI["4"]
+local script = UI["4"]
 	local p = game.Players.LocalPlayer
 	m = p:GetMouse()
 	local screen = script.Parent
@@ -273,6 +256,39 @@ local function SCRIPT_4()
 		ColorOn = Color3.fromRGB(85, 170, 127);
 		ColorOff = Color3.fromRGB(170, 87, 88);
 	}
+	cooldown = script.Parent:WaitForChild("data"):WaitForChild("Speed")
+	-- set eqtool
+	task.spawn(function()
+		local p = game.Players.LocalPlayer
+		while task.wait() do
+			if p.Character and p.Character:FindFirstChildOfClass("Tool") then
+				script.Parent:WaitForChild("eqTool").Value = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+			else
+				script.Parent:WaitForChild("eqTool").Value = nil
+			end
+		end
+	end)
+	
+	--TextSpeed
+	task.spawn(function()
+		txtbox = script.Parent:WaitForChild("SetSpeed"):WaitForChild("TextBox")
+		txtbox.FocusLost:Connect(function()
+			txt = txtbox.Text
+			if tonumber(txt)/100 <= 0 then -- that mean try again
+				print("ERROR: you cant use this number")
+				return nil
+			end
+			if tonumber(txt) == nil then
+				print("ERROR: you cant use letters on the speed")
+				return nil
+			end
+			cooldown.Value = tonumber(txt)/100
+			game.TweenService:Create(txtbox.Parent,TweenInfo.new(.5),{BackgroundTransparency = 1}):Play()
+			game.TweenService:Create(txtbox.Parent.UIStroke,TweenInfo.new(.5),{Transparency = 1}):Play()
+			game.TweenService:Create(txtbox,TweenInfo.new(.5),{TextTransparency = 1}):Play()
+		end)
+	end)
+	
 	-- pos mouse
 	task.spawn(function()
 		game["Run Service"].RenderStepped:Connect(function()
@@ -290,10 +306,12 @@ local function SCRIPT_4()
 			end
 		end)
 	end)
+	
+	
 	-- script autoClicker
-
+	repeat wait() until cooldown.Value > 0
 	task.spawn(function()
-
+	
 		local function updateColors(v)
 			if v then
 				game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
@@ -312,34 +330,20 @@ local function SCRIPT_4()
 			updateColors(v)
 		end)
 	end)
-
+	
 	-- loop
 	task.spawn(function()
 		while task.wait(cooldown.Value) do
 			if auto.Start.Value then
+				if script.Parent:WaitForChild("eqTool").Value ~= nil then
 				-- function click
-				Module:Click()
+					Module:Click()
+				end
 			end
 		end
 	end)
+	
 end
 task.spawn(SCRIPT_4)
--- // StarterGui.AutoGui.data.setData \\ --
-local function SCRIPT_f()
-	local script = UI["f"]
-	local module = require(script.Parent.Parent:WaitForChild("ModuleScript"))
-	game["Run Service"].RenderStepped:Connect(function()
-		local f = UI["2"]
-		if module:getMouseTargetScale(f) ~= nil and module:getMouseTargetScale(f)[1] then
-			UI["e"].Value,UI["d"].Value = module:getMouseTargetScale(f)[1],module:getMouseTargetScale(f)[2]
-		end
-		local face = module:getTargetSurface(module:getMouseTargetScale(f)[1],module:getMouseTargetScale(f)[2])
-		if face == nil then
-			return nil
-		end
-		UI["10"].Face = face
-	end)
-end
-task.spawn(SCRIPT_f)
 
 return UI["1"], require;
