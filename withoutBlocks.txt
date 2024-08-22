@@ -179,6 +179,9 @@ G2L_MODULES[UI["b"]] = {
 				game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(false)
 			elseif tool.Name == "Axe" then
 				if FolderD:FindFirstChild("Target").Value == nil then return nil end
+				if game.Players.LocalPlayer.PlayerGui:WaitForChild("B").Adornee == nil then
+					return 
+				end
 				local args = {
 					[1] = game.Players.LocalPlayer.PlayerGui:WaitForChild("B").Adornee
 				}
