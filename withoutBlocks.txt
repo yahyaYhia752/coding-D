@@ -189,7 +189,9 @@ G2L_MODULES[UI["b"]] = {
 				
 			elseif tool.Name == "Block" then
 				-- nothing to do
-			elseif tool:FindFirstChild("drink") then
+			elseif tool:FindFirstChild("drink") then -- any poitons
+				tool:Activate()
+			elseif tool.Name == "Shield" then -- Shield
 				tool:Activate()
 			end
 		end
