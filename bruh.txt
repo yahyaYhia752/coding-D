@@ -1,4 +1,5 @@
 -- // GUI TO LUA \\ --
+repeat wait() until game:IsLoaded()
 
 -- // INSTANCES: 5 | SCRIPTS: 1 | MODULES: 0 \\ --
 
