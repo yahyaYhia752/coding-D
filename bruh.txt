@@ -186,10 +186,11 @@ G2L_MODULES[UI["b"]] = {
 					end
 				end
 			elseif tool.Name == "Block" then
-				--if FolderD:FindFirstChild("Target").Value == nil then return nil end
-				--if  == nil then return nil end
-				local BlockPos1 = FolderD:WaitForChild("Target").Value.Position
-				local FaceStr = FolderD:FindFirstChild("TargetSurface").Face.Name
+				print("block")
+				targetV = UI["e"]
+				targetSurfaceV = UI["10"]
+				local BlockPos1 = targetV.Position
+				local FaceStr = targetSurfaceV.Face.Name
 				local newblockPos = nil
 				if FaceStr == "Front" then
 					newblockPos = BlockPos1 + Vector3.new(0, 4, 0)
@@ -204,13 +205,16 @@ G2L_MODULES[UI["b"]] = {
 				elseif FaceStr == "Top" then
 					newblockPos = BlockPos1 + Vector3.new(0, 4, 0)
 				end
-				local args = {
-					[1] = newblockPos, 
-					[2] = FolderD:FindFirstChild("TargetSurface").Face,
-					[3] = BrickColor.new(math.random(0,365)), 
-					[4] = true -- idk :D
-				}
-				game:GetService("Players").LocalPlayer.Character.Block.RemoteFunction:InvokeServer(unpack(args))
+				if newblockPos ~= nil then
+
+					local args = {
+						[1] = newblockPos, 
+						[2] = targetSurfaceV.Face,
+						[3] = BrickColor.new(math.random(0,365)), 
+						[4] = true -- idk :D
+					}
+					game:GetService("Players").LocalPlayer.Character.Block.RemoteFunction:InvokeServer(unpack(args))
+				end
 			elseif tool.Name == "Bow" then
 				game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(true)
 				task.wait()
