@@ -188,7 +188,7 @@ G2L_MODULES[UI["b"]] = {
 					[1] = game.Players.LocalPlayer.PlayerGui:WaitForChild("B").Adornee
 				}
 				game:GetService("Players").LocalPlayer.Character.Axe.RemoteEvent:FireServer(unpack(args))
-				
+
 			elseif tool.Name == "Block" then
 				-- nothing to do until now :D
 				return 
@@ -221,10 +221,15 @@ local function SCRIPT_4()
 			posM.Position = UDim2.new(0,m.X,0,m.Y)
 		end)
 	end)
-	-- if mouse click
+	-- Do auto true or false
 	task.spawn(function()
 		auto.F.MouseButton1Down:Connect(function()
 			auto.Start.Value = not auto.Start.Value
+		end)
+		game.UserInputService.InputBegan:Connect(function(k)
+			if k.KeyCode == Enum.KeyCode.E then
+				auto.Start.Value = not auto.Start.Value
+			end
 		end)
 	end)
 	-- script autoClicker
