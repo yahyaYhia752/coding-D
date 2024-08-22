@@ -1,7 +1,7 @@
 -- // GUI TO LUA \\ --
 
 -- // INSTANCES: 16 | SCRIPTS: 2 | MODULES: 1 \\ --
-
+cooldown = .03
 local UI = {}
 
 -- // StarterGui.AutoGui \\ --
@@ -257,7 +257,7 @@ local function SCRIPT_4()
 
 	-- loop
 	task.spawn(function()
-		while task.wait() do
+		while task.wait(cooldown) do
 			if auto.Start.Value then
 				-- function click
 				Module:Click()
