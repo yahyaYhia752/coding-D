@@ -171,13 +171,13 @@ G2L_MODULES[UI["b"]] = {
 			if tool == nil or tool.Name == "Block" then return end
 			local FolderD = script.Parent:WaitForChild("data")
 			local p = game.Players:GetPlayers()
-			if tool.Name == "Sword" then
+			if tool.Name == "Sword" then --Sword Auto
 				tool:Activate()
-			elseif tool.Name == "Bow" then
+			elseif tool.Name == "Bow" then --Bow Auto
 				game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(true)
 				wait()
 				game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(false)
-			elseif tool.Name == "Axe" then
+			elseif tool.Name == "Axe" then -- Pickaxe Auto
 				if FolderD:FindFirstChild("Target").Value == nil then return nil end
 				if game.Players.LocalPlayer.PlayerGui:WaitForChild("B").Adornee == nil then
 					return 
@@ -186,6 +186,11 @@ G2L_MODULES[UI["b"]] = {
 					[1] = game.Players.LocalPlayer.PlayerGui:WaitForChild("B").Adornee
 				}
 				game:GetService("Players").LocalPlayer.Character.Axe.RemoteEvent:FireServer(unpack(args))
+				
+			elseif tool.Name == "Block" then
+				-- nothing to do
+			elseif tool:FindFirstChild("drink") then
+				tool:Activate()
 			end
 		end
 		return z
