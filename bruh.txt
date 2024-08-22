@@ -121,7 +121,7 @@ G2L_MODULES[UI["b"]] = {
 			local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
 			local part, position = workspace:FindPartOnRay(ray, plr.Character)
 
-			return part, position
+			return {part, position}
 		end
 		function z:getMouseTargetOffset(frame:Frame)
 			local x,y = frame.Position.X.Offset,frame.Position.Y.Offset
@@ -130,7 +130,7 @@ G2L_MODULES[UI["b"]] = {
 			local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
 			local part, position = workspace:FindPartOnRay(ray, plr.Character)
 
-			return part, position
+			return {part, position}
 		end
 		function z:getTargetSurface(part, position)
 			if part == nil then
@@ -293,10 +293,10 @@ local function SCRIPT_f()
 	local module = require(script.Parent.Parent:WaitForChild("ModuleScript"))
 	game["Run Service"].RenderStepped:Connect(function()
 		local f = UI["2"]
-		if module:getMouseTargetScale(f)[1].Name == "Block" then
-			script.Parent.Target.Value,script.Parent.Position3d.Value = module:getMouseTargetScale(f)
+		if module:getMouseTargetScale(f) ~= nil and module:getMouseTargetScale(f)[1].Name == "Block" then
+			script.Parent.Target.Value,script.Parent.Position3d.Value = module:getMouseTargetScale(f)[1],module:getMouseTargetScale(f)[2]
 		end
-		local face = module:getTargetSurface(module:getMouseTargetScale(f))
+		local face = module:getTargetSurface(module:getMouseTargetScale(f)[1],module:getMouseTargetScale(f)[2])
 		if face == nil then
 			return nil
 		end
