@@ -96,141 +96,141 @@ UI["10"]["Name"] = [[TargetSurface]]
 local G2L_REQUIRE = require;
 local G2L_MODULES = {};
 local function require(Module:ModuleScript)
-    local ModuleState = G2L_MODULES[Module];
-    if ModuleState then
-        if not ModuleState.Required then
-            ModuleState.Required = true;
-            ModuleState.Value = ModuleState.Closure();
-        end
-        return ModuleState.Value;
-    end;
-    return G2L_REQUIRE(Module);
+	local ModuleState = G2L_MODULES[Module];
+	if ModuleState then
+		if not ModuleState.Required then
+			ModuleState.Required = true;
+			ModuleState.Value = ModuleState.Closure();
+		end
+		return ModuleState.Value;
+	end;
+	return G2L_REQUIRE(Module);
 end
 
 G2L_MODULES[UI["b"]] = {
-Closure = function()
-    local script = UI["b"]
-local z = {}
-local plr = game.Players.LocalPlayer
-local Cam = workspace.CurrentCamera
-m = plr:GetMouse()
-function z:getMouseTargetScale(frame)
-	local x,y = m.ViewSizeX * frame.Position.X.Scale,m.ViewSizeY * frame.Position.Y.Scale 
-	local mousePos = Vector2.new(x, y)
-	local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
-	local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
-	local part, position = workspace:FindPartOnRay(ray, plr.Character)
+	Closure = function()
+		local script = UI["b"]
+		local z = {}
+		local plr = game.Players.LocalPlayer
+		local Cam = workspace.CurrentCamera
+		m = plr:GetMouse()
+		function z:getMouseTargetScale(frame)
+			local x,y = m.ViewSizeX * frame.Position.X.Scale,m.ViewSizeY * frame.Position.Y.Scale 
+			local mousePos = Vector2.new(x, y)
+			local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
+			local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
+			local part, position = workspace:FindPartOnRay(ray, plr.Character)
 
-	return part, position
-end
-function z:getMouseTargetOffset(frame:Frame)
-	local x,y = frame.Position.X.Offset,frame.Position.Y.Offset
-	local mousePos = Vector2.new(x, y)
-	local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
-	local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
-	local part, position = workspace:FindPartOnRay(ray, plr.Character)
-
-	return part, position
-end
-function z:getTargetSurface(part, position)
-	if part == nil then
-		return nil
-	end
-	local partSize = part.Size
-	local partPosition = part.Position
-
-	local difference = position - partPosition
-
-	local absDifference = Vector3.new(math.abs(difference.X), math.abs(difference.Y), math.abs(difference.Z))
-
-	if absDifference.X > absDifference.Y and absDifference.X > absDifference.Z then
-		if difference.X > 0 then
-			return Enum.NormalId.Right
-		else
-			return Enum.NormalId.Left
+			return part, position
 		end
-	elseif absDifference.Y > absDifference.X and absDifference.Y > absDifference.Z then
-		if difference.Y > 0 then
-			return Enum.NormalId.Top
-		else
-			return Enum.NormalId.Bottom
-		end
-	else
-		if difference.Z > 0 then
-			return Enum.NormalId.Front
-		else
-			return Enum.NormalId.Back
-		end
-	end
-end
+		function z:getMouseTargetOffset(frame:Frame)
+			local x,y = frame.Position.X.Offset,frame.Position.Y.Offset
+			local mousePos = Vector2.new(x, y)
+			local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
+			local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
+			local part, position = workspace:FindPartOnRay(ray, plr.Character)
 
-function z:Click()
-	local range = 99e9
-	local player = game.Players.LocalPlayer
-	local tool = player.Character and player.Character:FindFirstChildOfClass("Tool")
-	if tool == nil then return end
-	local FolderD = script.Parent:WaitForChild("data")
-	local p = game.Players:GetPlayers()
-	if tool.Name == "Sword" then
-		for i = 2, #p do local v = p[i].Character
-			if v and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(v.HumanoidRootPart.Position) <= range then
-				if tool and tool:FindFirstChild("Handle") then
-					tool:Activate()
-					--for i,v in next, v:GetChildren() do
-					--	if v:IsA("BasePart") then
-					--		firetouchinterest(tool.Handle,v,0)
-					--		firetouchinterest(tool.Handle,v,1)
-					--	end
-					--end
+			return part, position
+		end
+		function z:getTargetSurface(part, position)
+			if part == nil then
+				return nil
+			end
+			local partSize = part.Size
+			local partPosition = part.Position
+
+			local difference = position - partPosition
+
+			local absDifference = Vector3.new(math.abs(difference.X), math.abs(difference.Y), math.abs(difference.Z))
+
+			if absDifference.X > absDifference.Y and absDifference.X > absDifference.Z then
+				if difference.X > 0 then
+					return Enum.NormalId.Right
+				else
+					return Enum.NormalId.Left
+				end
+			elseif absDifference.Y > absDifference.X and absDifference.Y > absDifference.Z then
+				if difference.Y > 0 then
+					return Enum.NormalId.Top
+				else
+					return Enum.NormalId.Bottom
+				end
+			else
+				if difference.Z > 0 then
+					return Enum.NormalId.Front
+				else
+					return Enum.NormalId.Back
 				end
 			end
 		end
-	elseif tool.Name == "Block" then
-		--if FolderD:FindFirstChild("Target").Value == nil then return nil end
-		--if  == nil then return nil end
-		local BlockPos1 = FolderD:WaitForChild("Target").Value.Position
-		local FaceStr = FolderD:FindFirstChild("TargetSurface").Face.Name
-		local newblockPos = nil
-		if FaceStr == "Front" then
-			newblockPos = BlockPos1 + Vector3.new(0, 4, 0)
-		elseif FaceStr == "Bottom" then
-			newblockPos = BlockPos1 + Vector3.new(0, -4, 0)
-		elseif FaceStr == "Back" then
-			newblockPos = BlockPos1 + Vector3.new(0, 0, -4)
-		elseif FaceStr == "Left" then
-			newblockPos = BlockPos1 + Vector3.new(-4, 0, 0)
-		elseif FaceStr == "Right" then
-			newblockPos = BlockPos1 + Vector3.new(4, 0, 0)
-		elseif FaceStr == "Top" then
-			newblockPos = BlockPos1 + Vector3.new(0, 4, 0)
+
+		function z:Click()
+			local range = 99e9
+			local player = game.Players.LocalPlayer
+			local tool = player.Character and player.Character:FindFirstChildOfClass("Tool")
+			if tool == nil then return end
+			local FolderD = script.Parent:WaitForChild("data")
+			local p = game.Players:GetPlayers()
+			if tool.Name == "Sword" then
+				for i = 2, #p do local v = p[i].Character
+					if v and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and player:DistanceFromCharacter(v.HumanoidRootPart.Position) <= range then
+						if tool and tool:FindFirstChild("Handle") then
+							tool:Activate()
+							--for i,v in next, v:GetChildren() do
+							--	if v:IsA("BasePart") then
+							--		firetouchinterest(tool.Handle,v,0)
+							--		firetouchinterest(tool.Handle,v,1)
+							--	end
+							--end
+						end
+					end
+				end
+			elseif tool.Name == "Block" then
+				--if FolderD:FindFirstChild("Target").Value == nil then return nil end
+				--if  == nil then return nil end
+				local BlockPos1 = FolderD:WaitForChild("Target").Value.Position
+				local FaceStr = FolderD:FindFirstChild("TargetSurface").Face.Name
+				local newblockPos = nil
+				if FaceStr == "Front" then
+					newblockPos = BlockPos1 + Vector3.new(0, 4, 0)
+				elseif FaceStr == "Bottom" then
+					newblockPos = BlockPos1 + Vector3.new(0, -4, 0)
+				elseif FaceStr == "Back" then
+					newblockPos = BlockPos1 + Vector3.new(0, 0, -4)
+				elseif FaceStr == "Left" then
+					newblockPos = BlockPos1 + Vector3.new(-4, 0, 0)
+				elseif FaceStr == "Right" then
+					newblockPos = BlockPos1 + Vector3.new(4, 0, 0)
+				elseif FaceStr == "Top" then
+					newblockPos = BlockPos1 + Vector3.new(0, 4, 0)
+				end
+				local args = {
+					[1] = newblockPos, 
+					[2] = FolderD:FindFirstChild("TargetSurface").Face,
+					[3] = BrickColor.new(math.random(0,365)), 
+					[4] = true -- idk :D
+				}
+				game:GetService("Players").LocalPlayer.Character.Block.RemoteFunction:InvokeServer(unpack(args))
+			elseif tool.Name == "Bow" then
+				game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(true)
+				task.wait()
+				game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(false)
+			elseif tool.Name == "Axe" then
+				if FolderD:FindFirstChild("Target").Value == nil then return nil end
+
+				local args = {
+					[1] = game.Players.LocalPlayer.PlayerGui:WaitForChild("B").Adornee
+				}
+				game:GetService("Players").LocalPlayer.Character.Axe.RemoteEvent:FireServer(unpack(args))
+			end
 		end
-		local args = {
-			[1] = newblockPos, 
-			[2] = FolderD:FindFirstChild("TargetSurface").Face,
-			[3] = BrickColor.new(math.random(0,365)), 
-			[4] = true -- idk :D
-		}
-		game:GetService("Players").LocalPlayer.Character.Block.RemoteFunction:InvokeServer(unpack(args))
-	elseif tool.Name == "Bow" then
-		game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(true)
-		task.wait()
-		game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(false)
-	elseif tool.Name == "Axe" then
-		if FolderD:FindFirstChild("Target").Value == nil then return nil end
+		return z
 
-		local args = {
-			[1] = FolderD:FindFirstChild("Target").Value
-		}
-		game:GetService("Players").LocalPlayer.Character.Axe.RemoteEvent:FireServer(unpack(args))
 	end
-end
-return z
-
-end
 }
 -- // StarterGui.AutoGui.LocalScript \\ --
 local function SCRIPT_4()
-local script = UI["4"]
+	local script = UI["4"]
 	local p = game.Players.LocalPlayer
 	m = p:GetMouse()
 	local screen = script.Parent
@@ -254,9 +254,9 @@ local script = UI["4"]
 		end)
 	end)
 	-- script autoClicker
-	
+
 	task.spawn(function()
-	
+
 		local function updateColors(v)
 			if v then
 				game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
@@ -275,7 +275,7 @@ local script = UI["4"]
 			updateColors(v)
 		end)
 	end)
-	
+
 	-- loop
 	task.spawn(function()
 		while task.wait() do
@@ -289,7 +289,7 @@ end
 task.spawn(SCRIPT_4)
 -- // StarterGui.AutoGui.data.setData \\ --
 local function SCRIPT_f()
-local script = UI["f"]
+	local script = UI["f"]
 	local module = require(script.Parent.Parent:WaitForChild("ModuleScript"))
 	game["Run Service"].RenderStepped:Connect(function()
 		local f = script.Parent.Parent:WaitForChild("posM")
