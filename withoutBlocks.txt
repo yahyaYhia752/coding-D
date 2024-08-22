@@ -1,7 +1,7 @@
 -- // GUI TO LUA \\ --
 
 -- // INSTANCES: 16 | SCRIPTS: 2 | MODULES: 1 \\ --
-cooldown = .03
+cooldown = .01
 local UI = {}
 
 -- // StarterGui.AutoGui \\ --
