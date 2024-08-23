@@ -8,7 +8,7 @@ end
 _G.AutoClickerStart_Welp = true
 local touchGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("TouchGui")
 if touchGui then
-	touchGui:Destroy()
+	touchGui.Name = "touchGui-oof"
 end
 
 -- // INSTANCES: 38 | SCRIPTS: 1 | MODULES: 1 \\ --
@@ -18,7 +18,7 @@ local UI = {}
 
 -- // StarterGui.ShfitLock \\ --
 --if game["Run Service"]:IsStudio() ~= true then
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/yahyaYhia752/coding-D/main/ShiftLock.txt'),true))()
+--loadstring(game:HttpGet(('https://raw.githubusercontent.com/yahyaYhia752/coding-D/main/ShiftLock.txt'),true))()
 --end
 
 -- // StarterGui.AutoGui \\ --
