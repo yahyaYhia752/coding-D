@@ -6,8 +6,11 @@ if _G.AutoClickerStart_Welp then
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("AutoGui"):Destroy()
 end
 _G.AutoClickerStart_Welp = true
-
--- // INSTANCES: 37 | SCRIPTS: 1 | MODULES: 1 \\ --
+local touchGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("TouchGui")
+if touchGui then
+	touchGui.Name = "TouchGui-off"
+end
+-- // INSTANCES: 38 | SCRIPTS: 1 | MODULES: 1 \\ --
 
 local UI = {}
 
@@ -42,7 +45,7 @@ UI["5"]["BorderSizePixel"] = 0
 UI["5"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
 UI["5"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
 UI["5"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
-UI["5"]["Position"] = UDim2.new(0, 40, 0.1, 0)
+UI["5"]["Position"] = UDim2.new(0, 40, 0, 57)
 UI["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
 UI["5"]["Name"] = [[auto]]
 
@@ -76,177 +79,177 @@ UI["a"] = Instance.new("UIStroke", UI["5"])
 UI["a"]["Thickness"] = 1.5
 UI["a"]["Color"] = Color3.fromRGB(107, 107, 107)
 
+-- // StarterGui.AutoGui.auto.EditMode \\ --
+UI["b"] = Instance.new("BoolValue", UI["5"])
+UI["b"]["Name"] = [[EditMode]]
+
 -- // StarterGui.AutoGui.ModuleScript \\ --
-UI["b"] = Instance.new("ModuleScript", UI["1"])
+UI["c"] = Instance.new("ModuleScript", UI["1"])
 
 
 -- // StarterGui.AutoGui.data \\ --
-UI["c"] = Instance.new("Folder", UI["1"])
-UI["c"]["Name"] = [[data]]
+UI["d"] = Instance.new("Folder", UI["1"])
+UI["d"]["Name"] = [[data]]
 
 -- // StarterGui.AutoGui.blockSpeed \\ --
-UI["d"] = Instance.new("Frame", UI["1"])
-UI["d"]["BorderSizePixel"] = 0
-UI["d"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
-UI["d"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
-UI["d"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
-UI["d"]["Position"] = UDim2.new(0.1, 40, 0.1, 0)
-UI["d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["d"]["Name"] = [[blockSpeed]]
+UI["e"] = Instance.new("Frame", UI["1"])
+UI["e"]["BorderSizePixel"] = 0
+UI["e"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
+UI["e"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["e"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
+UI["e"]["Position"] = UDim2.new(0.1, 40, 0.1, 0)
+UI["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["e"]["Name"] = [[blockSpeed]]
 
 -- // StarterGui.AutoGui.blockSpeed.UIAspectRatioConstraint \\ --
-UI["e"] = Instance.new("UIAspectRatioConstraint", UI["d"])
-UI["e"]["AspectRatio"] = 1.64673
+UI["f"] = Instance.new("UIAspectRatioConstraint", UI["e"])
+UI["f"]["AspectRatio"] = 1.64673
 
 -- // StarterGui.AutoGui.blockSpeed.UICorner \\ --
-UI["f"] = Instance.new("UICorner", UI["d"])
+UI["10"] = Instance.new("UICorner", UI["e"])
 
 
 -- // StarterGui.AutoGui.blockSpeed.UIStroke \\ --
-UI["10"] = Instance.new("UIStroke", UI["d"])
-UI["10"]["Thickness"] = 1.5
-UI["10"]["Color"] = Color3.fromRGB(0, 86, 255)
+UI["11"] = Instance.new("UIStroke", UI["e"])
+UI["11"]["Thickness"] = 1.5
+UI["11"]["Color"] = Color3.fromRGB(0, 86, 255)
 
 -- // StarterGui.AutoGui.blockSpeed.TextBox \\ --
-UI["11"] = Instance.new("TextBox", UI["d"])
-UI["11"]["CursorPosition"] = -1
-UI["11"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
-UI["11"]["BorderSizePixel"] = 0
-UI["11"]["TextSize"] = 14
-UI["11"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
-UI["11"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-UI["11"]["Size"] = UDim2.new(1, 0, 1, 0)
-UI["11"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["11"]["Text"] = [[سرعه البلوكات]]
-UI["11"]["BackgroundTransparency"] = 1
+UI["12"] = Instance.new("TextBox", UI["e"])
+UI["12"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+UI["12"]["BorderSizePixel"] = 0
+UI["12"]["TextSize"] = 14
+UI["12"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["12"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["12"]["Size"] = UDim2.new(1, 0, 1, 0)
+UI["12"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["12"]["Text"] = [[سرعه البلوكات]]
+UI["12"]["BackgroundTransparency"] = 1
 
 -- // StarterGui.AutoGui.blockSpeed.Speed \\ --
-UI["12"] = Instance.new("NumberValue", UI["d"])
-UI["12"]["Name"] = [[Speed]]
+UI["13"] = Instance.new("NumberValue", UI["e"])
+UI["13"]["Name"] = [[Speed]]
 
 -- // StarterGui.AutoGui.eqTool \\ --
-UI["13"] = Instance.new("ObjectValue", UI["1"])
-UI["13"]["Name"] = [[eqTool]]
+UI["14"] = Instance.new("ObjectValue", UI["1"])
+UI["14"]["Name"] = [[eqTool]]
 
 -- // StarterGui.AutoGui.SwordSpeed \\ --
-UI["14"] = Instance.new("Frame", UI["1"])
-UI["14"]["BorderSizePixel"] = 0
-UI["14"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
-UI["14"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
-UI["14"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
-UI["14"]["Position"] = UDim2.new(0.2, 40, 0.1, 0)
-UI["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["14"]["Name"] = [[SwordSpeed]]
+UI["15"] = Instance.new("Frame", UI["1"])
+UI["15"]["BorderSizePixel"] = 0
+UI["15"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
+UI["15"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["15"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
+UI["15"]["Position"] = UDim2.new(0.2, 40, 0.1, 0)
+UI["15"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["15"]["Name"] = [[SwordSpeed]]
 
 -- // StarterGui.AutoGui.SwordSpeed.UIAspectRatioConstraint \\ --
-UI["15"] = Instance.new("UIAspectRatioConstraint", UI["14"])
-UI["15"]["AspectRatio"] = 1.64673
+UI["16"] = Instance.new("UIAspectRatioConstraint", UI["15"])
+UI["16"]["AspectRatio"] = 1.64673
 
 -- // StarterGui.AutoGui.SwordSpeed.UICorner \\ --
-UI["16"] = Instance.new("UICorner", UI["14"])
+UI["17"] = Instance.new("UICorner", UI["15"])
 
 
 -- // StarterGui.AutoGui.SwordSpeed.UIStroke \\ --
-UI["17"] = Instance.new("UIStroke", UI["14"])
-UI["17"]["Thickness"] = 1.5
-UI["17"]["Color"] = Color3.fromRGB(0, 86, 255)
+UI["18"] = Instance.new("UIStroke", UI["15"])
+UI["18"]["Thickness"] = 1.5
+UI["18"]["Color"] = Color3.fromRGB(0, 86, 255)
 
 -- // StarterGui.AutoGui.SwordSpeed.TextBox \\ --
-UI["18"] = Instance.new("TextBox", UI["14"])
-UI["18"]["CursorPosition"] = -1
-UI["18"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
-UI["18"]["BorderSizePixel"] = 0
-UI["18"]["TextSize"] = 14
-UI["18"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
-UI["18"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-UI["18"]["Size"] = UDim2.new(1, 0, 1, 0)
-UI["18"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["18"]["Text"] = [[سرعه السيف]]
-UI["18"]["BackgroundTransparency"] = 1
+UI["19"] = Instance.new("TextBox", UI["15"])
+UI["19"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+UI["19"]["BorderSizePixel"] = 0
+UI["19"]["TextSize"] = 14
+UI["19"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["19"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["19"]["Size"] = UDim2.new(1, 0, 1, 0)
+UI["19"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["19"]["Text"] = [[سرعه السيف]]
+UI["19"]["BackgroundTransparency"] = 1
 
 -- // StarterGui.AutoGui.SwordSpeed.Speed \\ --
-UI["19"] = Instance.new("NumberValue", UI["14"])
-UI["19"]["Name"] = [[Speed]]
+UI["1a"] = Instance.new("NumberValue", UI["15"])
+UI["1a"]["Name"] = [[Speed]]
 
 -- // StarterGui.AutoGui.BowSpeed \\ --
-UI["1a"] = Instance.new("Frame", UI["1"])
-UI["1a"]["BorderSizePixel"] = 0
-UI["1a"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
-UI["1a"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
-UI["1a"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
-UI["1a"]["Position"] = UDim2.new(0.3, 40, 0.1, 0)
-UI["1a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["1a"]["Name"] = [[BowSpeed]]
+UI["1b"] = Instance.new("Frame", UI["1"])
+UI["1b"]["BorderSizePixel"] = 0
+UI["1b"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
+UI["1b"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["1b"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
+UI["1b"]["Position"] = UDim2.new(0.3, 40, 0.1, 0)
+UI["1b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["1b"]["Name"] = [[BowSpeed]]
 
 -- // StarterGui.AutoGui.BowSpeed.UIAspectRatioConstraint \\ --
-UI["1b"] = Instance.new("UIAspectRatioConstraint", UI["1a"])
-UI["1b"]["AspectRatio"] = 1.64673
+UI["1c"] = Instance.new("UIAspectRatioConstraint", UI["1b"])
+UI["1c"]["AspectRatio"] = 1.64673
 
 -- // StarterGui.AutoGui.BowSpeed.UICorner \\ --
-UI["1c"] = Instance.new("UICorner", UI["1a"])
+UI["1d"] = Instance.new("UICorner", UI["1b"])
 
 
 -- // StarterGui.AutoGui.BowSpeed.UIStroke \\ --
-UI["1d"] = Instance.new("UIStroke", UI["1a"])
-UI["1d"]["Thickness"] = 1.5
-UI["1d"]["Color"] = Color3.fromRGB(0, 86, 255)
+UI["1e"] = Instance.new("UIStroke", UI["1b"])
+UI["1e"]["Thickness"] = 1.5
+UI["1e"]["Color"] = Color3.fromRGB(0, 86, 255)
 
 -- // StarterGui.AutoGui.BowSpeed.TextBox \\ --
-UI["1e"] = Instance.new("TextBox", UI["1a"])
-UI["1e"]["CursorPosition"] = -1
-UI["1e"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
-UI["1e"]["BorderSizePixel"] = 0
-UI["1e"]["TextSize"] = 14
-UI["1e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
-UI["1e"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-UI["1e"]["Size"] = UDim2.new(1, 0, 1, 0)
-UI["1e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["1e"]["Text"] = [[سرعه القوس]]
-UI["1e"]["BackgroundTransparency"] = 1
+UI["1f"] = Instance.new("TextBox", UI["1b"])
+UI["1f"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+UI["1f"]["BorderSizePixel"] = 0
+UI["1f"]["TextSize"] = 14
+UI["1f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["1f"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["1f"]["Size"] = UDim2.new(1, 0, 1, 0)
+UI["1f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["1f"]["Text"] = [[سرعه القوس]]
+UI["1f"]["BackgroundTransparency"] = 1
 
 -- // StarterGui.AutoGui.BowSpeed.Speed \\ --
-UI["1f"] = Instance.new("NumberValue", UI["1a"])
-UI["1f"]["Name"] = [[Speed]]
+UI["20"] = Instance.new("NumberValue", UI["1b"])
+UI["20"]["Name"] = [[Speed]]
 
 -- // StarterGui.AutoGui.AxeSpeed \\ --
-UI["20"] = Instance.new("Frame", UI["1"])
-UI["20"]["BorderSizePixel"] = 0
-UI["20"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
-UI["20"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
-UI["20"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
-UI["20"]["Position"] = UDim2.new(0.4, 40, 0.1, 0)
-UI["20"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["20"]["Name"] = [[AxeSpeed]]
+UI["21"] = Instance.new("Frame", UI["1"])
+UI["21"]["BorderSizePixel"] = 0
+UI["21"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
+UI["21"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["21"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
+UI["21"]["Position"] = UDim2.new(0.4, 40, 0.1, 0)
+UI["21"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["21"]["Name"] = [[AxeSpeed]]
 
 -- // StarterGui.AutoGui.AxeSpeed.UIAspectRatioConstraint \\ --
-UI["21"] = Instance.new("UIAspectRatioConstraint", UI["20"])
-UI["21"]["AspectRatio"] = 1.64673
+UI["22"] = Instance.new("UIAspectRatioConstraint", UI["21"])
+UI["22"]["AspectRatio"] = 1.64673
 
 -- // StarterGui.AutoGui.AxeSpeed.UICorner \\ --
-UI["22"] = Instance.new("UICorner", UI["20"])
+UI["23"] = Instance.new("UICorner", UI["21"])
 
 
 -- // StarterGui.AutoGui.AxeSpeed.UIStroke \\ --
-UI["23"] = Instance.new("UIStroke", UI["20"])
-UI["23"]["Thickness"] = 1.5
-UI["23"]["Color"] = Color3.fromRGB(0, 86, 255)
+UI["24"] = Instance.new("UIStroke", UI["21"])
+UI["24"]["Thickness"] = 1.5
+UI["24"]["Color"] = Color3.fromRGB(0, 86, 255)
 
 -- // StarterGui.AutoGui.AxeSpeed.TextBox \\ --
-UI["24"] = Instance.new("TextBox", UI["20"])
-UI["24"]["CursorPosition"] = -1
-UI["24"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
-UI["24"]["BorderSizePixel"] = 0
-UI["24"]["TextSize"] = 14
-UI["24"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
-UI["24"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-UI["24"]["Size"] = UDim2.new(1, 0, 1, 0)
-UI["24"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["24"]["Text"] = [[سرعه الفاس]]
-UI["24"]["BackgroundTransparency"] = 1
+UI["25"] = Instance.new("TextBox", UI["21"])
+UI["25"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+UI["25"]["BorderSizePixel"] = 0
+UI["25"]["TextSize"] = 14
+UI["25"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["25"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["25"]["Size"] = UDim2.new(1, 0, 1, 0)
+UI["25"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["25"]["Text"] = [[سرعه الفاس]]
+UI["25"]["BackgroundTransparency"] = 1
 
 -- // StarterGui.AutoGui.AxeSpeed.Speed \\ --
-UI["25"] = Instance.new("NumberValue", UI["20"])
-UI["25"]["Name"] = [[Speed]]
+UI["26"] = Instance.new("NumberValue", UI["21"])
+UI["26"]["Name"] = [[Speed]]
 
 -- Require G2L wrapper
 local G2L_REQUIRE = require;
@@ -263,9 +266,9 @@ local function require(Module:ModuleScript)
     return G2L_REQUIRE(Module);
 end
 
-G2L_MODULES[UI["b"]] = {
+G2L_MODULES[UI["c"]] = {
 Closure = function()
-    local script = UI["b"]
+    local script = UI["c"]
 local z = {}
 local plr = game.Players.LocalPlayer
 local Cam = workspace.CurrentCamera
@@ -334,16 +337,16 @@ function z:Click()
 	-- print(tool.Name)
 	local FolderD = script.Parent:WaitForChild("data")
 	local p = game.Players:GetPlayers()
-	
+
 	if tool.Name == "Sword" then --Sword Auto
 		tool:Activate()
 		task.wait(cooldowns[tool.Name:lower()].Value)
 	end
-	
+
 	if tool.Name == "Bow" then --Bow Auto
 		task.spawn(function() -- to cancel waiting
 			tool:WaitForChild("ServerControl"):InvokeServer(true)
-            tool:WaitForChild("ServerControl"):InvokeServer(false)
+			tool:WaitForChild("ServerControl"):InvokeServer(false)
 		end)
 		task.wait(cooldowns[tool.Name:lower()].Value)
 	end	
@@ -383,10 +386,12 @@ local script = UI["4"]
 	local screen = script.Parent
 	local posM = screen.posM
 	local auto= screen.auto
+	DholdingForEdit = 1
 	local Module = require(script.Parent:WaitForChild("ModuleScript"))
 	local D = {
 		ColorOn = Color3.fromRGB(85, 170, 127);
 		ColorOff = Color3.fromRGB(170, 87, 88);
+		EditMode = Color3.fromRGB(85, 85, 255)
 	}
 	cooldowns = {
 		["block"] = script.Parent:WaitForChild("blockSpeed"):WaitForChild("Speed"),
@@ -394,6 +399,9 @@ local script = UI["4"]
 		["bow"] = script.Parent:WaitForChild("BowSpeed"):WaitForChild("Speed"),
 		["axe"] = script.Parent:WaitForChild("AxeSpeed"):WaitForChild("Speed"),
 	}
+	-- EDIT SETS
+	startMove= false
+	M_isonBtn = false
 	-- set eqtool
 	task.spawn(function()
 		local p = game.Players.LocalPlayer
@@ -422,7 +430,7 @@ local script = UI["4"]
 					print("ERROR: you cant use this number")
 					return nil
 				end
-
+	
 				v.Value = tonumber(txt)/100
 				game.TweenService:Create(txtbox.Parent,TweenInfo.new(.5),{BackgroundTransparency = 1}):Play()
 				game.TweenService:Create(txtbox.Parent.UIStroke,TweenInfo.new(.5),{Transparency = 1}):Play()
@@ -440,11 +448,35 @@ local script = UI["4"]
 	-- Do auto true or false
 	task.spawn(function()
 		auto.F.MouseButton1Down:Connect(function()
-			auto:WaitForChild("Start").Value = not auto:WaitForChild("Start").Value
+			if auto:WaitForChild("EditMode").Value == false then
+				
+			for i=1,DholdingForEdit*10,1 do
+				wait(DholdingForEdit/10)
+				if startMove == false then
+					return nil
+				end
+			end
+				auto:WaitForChild("EditMode").Value = true
+			end
 		end)
+		auto.F.MouseButton1Up:Connect(function()
+			if auto:WaitForChild("EditMode").Value == true then
+				auto:WaitForChild("EditMode").Value = false
+			end
+		end)
+		auto.F.MouseButton1Up:Connect(function()
+			if auto:WaitForChild("EditMode").Value == true then
+			else
+			auto:WaitForChild("Start").Value = not auto:WaitForChild("Start").Value
+			end
+		end)
+		
 		game.UserInputService.InputBegan:Connect(function(k)
 			if k.KeyCode == Enum.KeyCode.E then
-				auto:WaitForChild("Start").Value = not auto:WaitForChild("Start").Value
+				if auto:WaitForChild("EditMode").Value == true then
+				else
+					auto:WaitForChild("Start").Value = not auto:WaitForChild("Start").Value
+				end
 			end
 		end)
 	end)
@@ -454,17 +486,18 @@ local script = UI["4"]
 	for i,v in pairs(cooldowns) do
 		repeat wait() until v.Value > 0
 	end
+	local function updateColors(v)
+		if v then
+			game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
+			game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
+		else
+			game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.ColorOff}):Play()
+			game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.ColorOff}):Play()
+		end
+	end
 	task.spawn(function()
 	
-		local function updateColors(v)
-			if v then
-				game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
-				game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
-			else
-				game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.ColorOff}):Play()
-				game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.ColorOff}):Play()
-			end
-		end
+	
 		local v = false
 		auto.Start.Value = v
 		updateColors(v)
@@ -474,8 +507,42 @@ local script = UI["4"]
 			updateColors(v)
 		end)
 	end)
+	-- script editMode
 	
-	-- loop
+	task.spawn(function()
+		auto.F.MouseEnter:Connect(function()
+			M_isonBtn = true
+		end)
+		auto.F.MouseLeave:Connect(function()
+			M_isonBtn = false
+		end)
+		auto.F.MouseButton1Down:Connect(function()
+			startMove = M_isonBtn
+		end)
+		auto.F.MouseButton1Up:Connect(function()
+			startMove = false
+		end)
+		auto:WaitForChild("EditMode").Changed:Connect(function()
+			if auto:WaitForChild("EditMode").Value == true then
+				auto.Start.Value = false
+				game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.EditMode}):Play()
+				game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.EditMode}):Play()
+			else
+				updateColors(auto:WaitForChild("Start").Value)
+			end
+		end)
+	end)
+	-- loop edit
+	task.spawn(function()
+	
+		while task.wait() do
+			enable = auto:WaitForChild("EditMode").Value
+			if enable == true and startMove then
+				game.TweenService:Create(auto,TweenInfo.new(.2),{Position = UDim2.new(0,m.X,0,m.Y)}):Play()
+			end
+		end
+	end)
+	-- loop auto
 	task.spawn(function()
 		while true do
 			if auto.Start.Value then
@@ -484,7 +551,7 @@ local script = UI["4"]
 					Module:Click()
 				end
 			end
-            task.wait()
+			task.wait()
 		end
 	end)
 	
