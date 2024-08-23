@@ -342,8 +342,8 @@ function z:Click()
 	
 	if tool.Name == "Bow" then --Bow Auto
 		task.spawn(function() -- to cancel waiting
-			game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(true)		
-			game:GetService("Players").LocalPlayer.Character.Bow.ServerControl:InvokeServer(false)
+			tool:WaitForChild("ServerControl"):InvokeServer(true)
+            tool:WaitForChild("ServerControl"):InvokeServer(false)
 		end)
 		task.wait(cooldowns[tool.Name:lower()].Value)
 	end	
@@ -354,7 +354,7 @@ function z:Click()
 		local args = {
 			[1] = game.Players.LocalPlayer:GetMouse().Target
 		}
-		game:GetService("Players").LocalPlayer.Character.Axe.RemoteEvent:FireServer(unpack(args))
+		tool:WaitForChild("RemoteEvent"):FireServer(unpack(args))
 		tool:Activate()
 		task.wait(cooldowns[tool.Name:lower()].Value)
 	end	
@@ -414,14 +414,15 @@ local script = UI["4"]
 			local txtbox:TextBox = v.Parent:WaitForChild("TextBox")
 			txtbox.FocusLost:Connect(function()
 				txt = txtbox.Text
-				if tonumber(txt)/100 <= 0 then -- that mean try again
-					print("ERROR: you cant use this number")
-					return nil
-				end
 				if tonumber(txt) == nil then
 					print("ERROR: you cant use letters on the speed")
 					return nil
 				end
+				if tonumber(txt)/100 <= 0 then -- that mean try again
+					print("ERROR: you cant use this number")
+					return nil
+				end
+
 				v.Value = tonumber(txt)/100
 				game.TweenService:Create(txtbox.Parent,TweenInfo.new(.5),{BackgroundTransparency = 1}):Play()
 				game.TweenService:Create(txtbox.Parent.UIStroke,TweenInfo.new(.5),{Transparency = 1}):Play()
