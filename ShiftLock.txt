@@ -4,7 +4,7 @@
 local UI = {}
 
 -- // StarterGui.Shiftlock \\ --
-UI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
+UI["1"] = Instance.new("ScreenGui",game.CoreGui)
 UI["1"]["Name"] = [[Shiftlock]]
 UI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
 
@@ -27,7 +27,7 @@ UI["4"] = Instance.new("LocalScript", UI["1"])
 
 -- // StarterGui.Shiftlock.ImageButton.ShiftGUI \\ --
 local function SCRIPT_3()
-local script = UI["3"]
+	local script = UI["3"]
 	local MobileCameraFramework = {}
 	local players = game:GetService("Players")
 	local runservice = game:GetService("RunService")
@@ -38,12 +38,12 @@ local script = UI["3"]
 	local humanoid = character.Humanoid
 	local camera = workspace.CurrentCamera
 	local button = script.Parent
-	
+
 	--Visiblity
 	uis = game:GetService("UserInputService")
 	ismobile = uis.TouchEnabled
 	button.Visible = ismobile
-	
+
 	local states = {
 		OFF = "rbxasset://textures/ui/mouseLock_off@2x.png",
 		ON = "rbxasset://textures/ui/mouseLock_on@2x.png"
@@ -99,12 +99,12 @@ local script = UI["3"]
 		end
 	end)
 	return MobileCameraFramework
-	
+
 end
 task.spawn(SCRIPT_3)
 -- // StarterGui.Shiftlock.LocalScript \\ --
 local function SCRIPT_4()
-local script = UI["4"]
+	local script = UI["4"]
 	local Players = game:GetService("Players")
 	local UserInputService = game:GetService("UserInputService")
 	local Settings = UserSettings()
@@ -133,7 +133,7 @@ local script = UI["4"]
 		ShiftLockController.OnShiftLockToggled:Fire()
 	end
 	local initialize = function()
-		
+
 	end
 	function ShiftLockController:IsShiftLocked()
 		return IsShiftLockMode and IsShiftLocked
@@ -225,7 +225,7 @@ local script = UI["4"]
 	end
 	enableShiftLock()
 	return ShiftLockController
-	
+
 end
 task.spawn(SCRIPT_4)
 
