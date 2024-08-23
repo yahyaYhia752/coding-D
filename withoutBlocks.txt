@@ -18,7 +18,7 @@ local UI = {}
 
 -- // StarterGui.ShfitLock \\ --
 --if game["Run Service"]:IsStudio() ~= true then
-	loadstring(game:HttpGet(('https://raw.githubusercontent.com/yahyaYhia752/coding-D/main/ShiftLock.txt'),true))()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/yahyaYhia752/coding-D/main/ShiftLock.txt'),true))()
 --end
 
 -- // StarterGui.AutoGui \\ --
@@ -52,7 +52,7 @@ UI["5"]["BorderSizePixel"] = 0
 UI["5"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
 UI["5"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
 UI["5"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
-UI["5"]["Position"] = UDim2.new(0, 40, 0, 57)
+UI["5"]["Position"] = UDim2.new(0, 40, 0.1, 0)
 UI["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
 UI["5"]["Name"] = [[auto]]
 
