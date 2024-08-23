@@ -331,7 +331,7 @@ function z:Click()
 	local player = game.Players.LocalPlayer
 	local tool = script.Parent.eqTool.Value
 	if tool == nil then return end
-	print(tool.Name)
+	-- print(tool.Name)
 	local FolderD = script.Parent:WaitForChild("data")
 	local p = game.Players:GetPlayers()
 	
