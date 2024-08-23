@@ -8,6 +8,7 @@ end
 _G.AutoClickerStart_Welp = true
 local touchGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("TouchGui")
 if touchGui then
+	print(touchGui)
 	touchGui.Name = "touchGui-oof"
 end
 
