@@ -1,17 +1,34 @@
 repeat wait() until game:IsLoaded()
-print("Loaded!!")
+intheGame = false
 _G.Mobile = false
 if _G.AutoClickerStart_Welp then
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("AutoGui"):Destroy()
 end
 _G.AutoClickerStart_Welp = true
 local touchGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("TouchGui")
-
+setScreen = function()
+	screen = game.Players.LocalPlayer.PlayerGui
+	GuiGame = screen:WaitForChild("ScreenGui")
+	GuiGame:WaitForChild("PromoFrame"):Destroy()
+	GuiGame:WaitForChild("CoinFrame").Position = UDim2.new(.86,0,.7,0)
+end
+setScreen()
+game.Players.LocalPlayer.CharacterAdded:Connect(function()
+	setScreen()
+end)
+game.Players.LocalPlayer.Chatted:Connect(function(msg)
+	cmd = "code"
+	argsMsg = msg:split(" ")
+	if argsMsg[1] == prefix and argsMsg[2]:lower() == "cmd" then
+		game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("PromoRewards"):FireServer(argsMsg[3]:lower())		
+	end
+end)
 if touchGui then
 	_G.Mobile = true
 	touchGui.Name = "TouchGui1"
 	task.spawn(function()
 		while task.wait() do
+			touchGui.Name = "TouchGui1"
 			for i,v in pairs(touchGui:WaitForChild("TouchControlFrame"):GetChildren()) do
 				v.Visible = true
 			end
@@ -20,17 +37,33 @@ if touchGui then
 end
 
 --fix auto blocks
-
 task.spawn(function()
-	uis = game.Players.LocalPlayer.PlayerGui
-	local GameGui = uis:WaitForChild("ScreenGui")
-	GameGui:WaitForChild("PotionButton"):Destroy()
-	GameGui:WaitForChild("PickAxeButton"):Destroy()
+	local h:Humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+	h.Died:Connect(function()
+		intheGame = false
+	end)
+	game.Players.LocalPlayer.CharacterAdded:Connect(function()
+		intheGame = false
+	end)
+	game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function()
+		if _G.Mobile == true then
+			intheGame = true
+		end
+	end)
 	game["Run Service"].RenderStepped:Connect(function()
+		uis = game.Players.LocalPlayer.PlayerGui
+		local GameGui = uis:WaitForChild("ScreenGui")
+		--if intheGame == true then
+		--	GameGui:WaitForChild("PotionButton").Visible = true
+		--	GameGui:WaitForChild("PickAxeButton").Visible = true
+		--else
+		--	GameGui:WaitForChild("PotionButton").Visible = false
+		--	GameGui:WaitForChild("PickAxeButton").Visible = false
+		--end
 		uis:WaitForChild("Shiftlock"):WaitForChild("ImageButton").Visible = true
 	end)
 end)
-
+print("Loaded!!")
 
 -- // INSTANCES: 54 | SCRIPTS: 1 | MODULES: 1 \\ --
 
