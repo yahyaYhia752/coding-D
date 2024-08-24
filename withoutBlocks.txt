@@ -17,6 +17,7 @@ task.spawn(function()
 	local h:Humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
 	h.Died:Connect(function()
 		touchGui.Name = "TouchGui"
+		touchGui.Enabled = true
 	end)
 	game.Players.LocalPlayer.CharacterAdded:Connect(function()
 		wait(.1)
