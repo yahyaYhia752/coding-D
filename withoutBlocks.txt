@@ -1,582 +1,177 @@
-repeat wait() until game:IsLoaded()
-print("Loaded!!")
-
-
-if _G.AutoClickerStart_Welp then
-	game.Players.LocalPlayer.PlayerGui:WaitForChild("AutoGui"):Destroy()
-end
-_G.AutoClickerStart_Welp = true
-local touchGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("TouchGui")
-
-if touchGui then
-	print(touchGui)
-	touchGui.Name = "touchGui-oof"
-end
---fix auto blocks
+local p = game.Players.LocalPlayer
+m = p:GetMouse()
+local screen = script.Parent
+local posM = screen.posM
+local auto= screen.auto
+DholdingForEdit = 1
+local Module = require(script.Parent:WaitForChild("ModuleScript"))
+local D = {
+	ColorOn = Color3.fromRGB(85, 170, 127);
+	ColorOff = Color3.fromRGB(170, 87, 88);
+	EditMode = Color3.fromRGB(85, 85, 255)
+}
+hold = false
+cooldowns = {
+	["block"] = script.Parent:WaitForChild("blockSpeed"):WaitForChild("Speed"),
+	["sword"] = script.Parent:WaitForChild("SwordSpeed"):WaitForChild("Speed"),
+	["bow"] = script.Parent:WaitForChild("BowSpeed"):WaitForChild("Speed"),
+	["axe"] = script.Parent:WaitForChild("AxeSpeed"):WaitForChild("Speed"),
+}
 task.spawn(function()
-	local h:Humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
-	h.Died:Connect(function()
-		touchGui.Name = "TouchGui"
-		touchGui.Enabled = true
+	while wait(1) do
+		game.Players.LocalPlayer.PlayerGui:WaitForChild("TouchGui1").Name = "TouchGui"
+		wait()
+		game.Players.LocalPlayer.PlayerGui:WaitForChild("TouchGui").Name = "TouchGui1"
+	end 
+end)
+-- set eqtool
+task.spawn(function()
+	local p = game.Players.LocalPlayer
+	while task.wait() do
+		if p.Character and p.Character:FindFirstChildOfClass("Tool") then
+			script.Parent:WaitForChild("eqTool").Value = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+		else
+			script.Parent:WaitForChild("eqTool").Value = nil
+		end
+	end
+end)
+
+--TextSpeed
+task.spawn(function()
+	for i,v in pairs(cooldowns) do
+
+
+		local txtbox:TextBox = v.Parent:WaitForChild("TextBox")
+		txtbox.FocusLost:Connect(function()
+			txt = txtbox.Text
+			if tonumber(txt) == nil then
+				print("ERROR: you cant use letters on the speed")
+				return nil
+			end
+			if tonumber(txt)/100 <= 0 then -- that mean try again
+				print("ERROR: you cant use this number")
+				return nil
+			end
+
+			v.Value = tonumber(txt)/100
+			game.TweenService:Create(txtbox.Parent,TweenInfo.new(.5),{BackgroundTransparency = 1}):Play()
+			game.TweenService:Create(txtbox.Parent.UIStroke,TweenInfo.new(.5),{Transparency = 1}):Play()
+			game.TweenService:Create(txtbox,TweenInfo.new(.5),{TextTransparency = 1}):Play()
+		end)
+	end
+end)
+
+-- pos mouse
+task.spawn(function()
+	game["Run Service"].RenderStepped:Connect(function()
+		posM.Position = UDim2.new(0,m.X,0,m.Y)
 	end)
-	game.Players.LocalPlayer.CharacterAdded:Connect(function()
-		wait(.1)
-		touchGui.Name = "touchGui-oof"
+end)
+-- set if button is hold or not
+task.spawn(function()
+	auto.F.MouseButton1Down:Connect(function()
+		hold = true
+	end)
+	auto.F.MouseButton1Up:Connect(function()
+		hold = false
 	end)
 end)
 
--- // INSTANCES: 38 | SCRIPTS: 1 | MODULES: 1 \\ --
-
-local UI = {}
-
-
--- // StarterGui.ShfitLock \\ --
---if game["Run Service"]:IsStudio() ~= true then
---loadstring(game:HttpGet(('https://raw.githubusercontent.com/yahyaYhia752/coding-D/main/ShiftLock.txt'),true))()
---end
-
--- // StarterGui.AutoGui \\ --
-UI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
-UI["1"]["Name"] = [[AutoGui]]
-UI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
-UI["1"]["ResetOnSpawn"] = false
-
--- // StarterGui.AutoGui.posM \\ --
-UI["2"] = Instance.new("Frame", UI["1"])
-UI["2"]["Visible"] = false
-UI["2"]["BorderSizePixel"] = 0
-UI["2"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
-UI["2"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
-UI["2"]["Size"] = UDim2.new(0, 7, 0, 7)
-UI["2"]["Position"] = UDim2.new(0.5, 0, 0.5, 0)
-UI["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["2"]["Name"] = [[posM]]
-
--- // StarterGui.AutoGui.posM.UIStroke \\ --
-UI["3"] = Instance.new("UIStroke", UI["2"])
-UI["3"]["Thickness"] = 1.5
-
--- // StarterGui.AutoGui.LocalScript \\ --
-UI["4"] = Instance.new("LocalScript", UI["1"])
-
-
--- // StarterGui.AutoGui.auto \\ --
-UI["5"] = Instance.new("Frame", UI["1"])
-UI["5"]["BorderSizePixel"] = 0
-UI["5"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
-UI["5"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
-UI["5"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
-UI["5"]["Position"] = UDim2.new(0, 40, 0.1, 0)
-UI["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["5"]["Name"] = [[auto]]
-
--- // StarterGui.AutoGui.auto.F \\ --
-UI["6"] = Instance.new("TextButton", UI["5"])
-UI["6"]["BorderSizePixel"] = 0
-UI["6"]["TextSize"] = 14
-UI["6"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
-UI["6"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
-UI["6"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-UI["6"]["Size"] = UDim2.new(1, 0, 1, 0)
-UI["6"]["BackgroundTransparency"] = 1
-UI["6"]["Name"] = [[F]]
-UI["6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["6"]["Text"] = [[اوتو (:]]
-
--- // StarterGui.AutoGui.auto.UIAspectRatioConstraint \\ --
-UI["7"] = Instance.new("UIAspectRatioConstraint", UI["5"])
-UI["7"]["AspectRatio"] = 1.64673
-
--- // StarterGui.AutoGui.auto.Start \\ --
-UI["8"] = Instance.new("BoolValue", UI["5"])
-UI["8"]["Name"] = [[Start]]
-
--- // StarterGui.AutoGui.auto.UICorner \\ --
-UI["9"] = Instance.new("UICorner", UI["5"])
-
-
--- // StarterGui.AutoGui.auto.UIStroke \\ --
-UI["a"] = Instance.new("UIStroke", UI["5"])
-UI["a"]["Thickness"] = 1.5
-UI["a"]["Color"] = Color3.fromRGB(107, 107, 107)
-
--- // StarterGui.AutoGui.auto.EditMode \\ --
-UI["b"] = Instance.new("BoolValue", UI["5"])
-UI["b"]["Name"] = [[EditMode]]
-
--- // StarterGui.AutoGui.ModuleScript \\ --
-UI["c"] = Instance.new("ModuleScript", UI["1"])
-
-
--- // StarterGui.AutoGui.data \\ --
-UI["d"] = Instance.new("Folder", UI["1"])
-UI["d"]["Name"] = [[data]]
-
--- // StarterGui.AutoGui.blockSpeed \\ --
-UI["e"] = Instance.new("Frame", UI["1"])
-UI["e"]["BorderSizePixel"] = 0
-UI["e"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
-UI["e"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
-UI["e"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
-UI["e"]["Position"] = UDim2.new(0.1, 40, 0.1, 0)
-UI["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["e"]["Name"] = [[blockSpeed]]
-
--- // StarterGui.AutoGui.blockSpeed.UIAspectRatioConstraint \\ --
-UI["f"] = Instance.new("UIAspectRatioConstraint", UI["e"])
-UI["f"]["AspectRatio"] = 1.64673
-
--- // StarterGui.AutoGui.blockSpeed.UICorner \\ --
-UI["10"] = Instance.new("UICorner", UI["e"])
-
-
--- // StarterGui.AutoGui.blockSpeed.UIStroke \\ --
-UI["11"] = Instance.new("UIStroke", UI["e"])
-UI["11"]["Thickness"] = 1.5
-UI["11"]["Color"] = Color3.fromRGB(0, 86, 255)
-
--- // StarterGui.AutoGui.blockSpeed.TextBox \\ --
-UI["12"] = Instance.new("TextBox", UI["e"])
-UI["12"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
-UI["12"]["BorderSizePixel"] = 0
-UI["12"]["TextSize"] = 14
-UI["12"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
-UI["12"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-UI["12"]["Size"] = UDim2.new(1, 0, 1, 0)
-UI["12"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["12"]["Text"] = [[سرعه البلوكات]]
-UI["12"]["BackgroundTransparency"] = 1
-
--- // StarterGui.AutoGui.blockSpeed.Speed \\ --
-UI["13"] = Instance.new("NumberValue", UI["e"])
-UI["13"]["Name"] = [[Speed]]
-
--- // StarterGui.AutoGui.eqTool \\ --
-UI["14"] = Instance.new("ObjectValue", UI["1"])
-UI["14"]["Name"] = [[eqTool]]
-
--- // StarterGui.AutoGui.SwordSpeed \\ --
-UI["15"] = Instance.new("Frame", UI["1"])
-UI["15"]["BorderSizePixel"] = 0
-UI["15"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
-UI["15"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
-UI["15"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
-UI["15"]["Position"] = UDim2.new(0.2, 40, 0.1, 0)
-UI["15"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["15"]["Name"] = [[SwordSpeed]]
-
--- // StarterGui.AutoGui.SwordSpeed.UIAspectRatioConstraint \\ --
-UI["16"] = Instance.new("UIAspectRatioConstraint", UI["15"])
-UI["16"]["AspectRatio"] = 1.64673
-
--- // StarterGui.AutoGui.SwordSpeed.UICorner \\ --
-UI["17"] = Instance.new("UICorner", UI["15"])
-
-
--- // StarterGui.AutoGui.SwordSpeed.UIStroke \\ --
-UI["18"] = Instance.new("UIStroke", UI["15"])
-UI["18"]["Thickness"] = 1.5
-UI["18"]["Color"] = Color3.fromRGB(0, 86, 255)
-
--- // StarterGui.AutoGui.SwordSpeed.TextBox \\ --
-UI["19"] = Instance.new("TextBox", UI["15"])
-UI["19"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
-UI["19"]["BorderSizePixel"] = 0
-UI["19"]["TextSize"] = 14
-UI["19"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
-UI["19"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-UI["19"]["Size"] = UDim2.new(1, 0, 1, 0)
-UI["19"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["19"]["Text"] = [[سرعه السيف]]
-UI["19"]["BackgroundTransparency"] = 1
-
--- // StarterGui.AutoGui.SwordSpeed.Speed \\ --
-UI["1a"] = Instance.new("NumberValue", UI["15"])
-UI["1a"]["Name"] = [[Speed]]
-
--- // StarterGui.AutoGui.BowSpeed \\ --
-UI["1b"] = Instance.new("Frame", UI["1"])
-UI["1b"]["BorderSizePixel"] = 0
-UI["1b"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
-UI["1b"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
-UI["1b"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
-UI["1b"]["Position"] = UDim2.new(0.3, 40, 0.1, 0)
-UI["1b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["1b"]["Name"] = [[BowSpeed]]
-
--- // StarterGui.AutoGui.BowSpeed.UIAspectRatioConstraint \\ --
-UI["1c"] = Instance.new("UIAspectRatioConstraint", UI["1b"])
-UI["1c"]["AspectRatio"] = 1.64673
-
--- // StarterGui.AutoGui.BowSpeed.UICorner \\ --
-UI["1d"] = Instance.new("UICorner", UI["1b"])
-
-
--- // StarterGui.AutoGui.BowSpeed.UIStroke \\ --
-UI["1e"] = Instance.new("UIStroke", UI["1b"])
-UI["1e"]["Thickness"] = 1.5
-UI["1e"]["Color"] = Color3.fromRGB(0, 86, 255)
-
--- // StarterGui.AutoGui.BowSpeed.TextBox \\ --
-UI["1f"] = Instance.new("TextBox", UI["1b"])
-UI["1f"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
-UI["1f"]["BorderSizePixel"] = 0
-UI["1f"]["TextSize"] = 14
-UI["1f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
-UI["1f"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-UI["1f"]["Size"] = UDim2.new(1, 0, 1, 0)
-UI["1f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["1f"]["Text"] = [[سرعه القوس]]
-UI["1f"]["BackgroundTransparency"] = 1
-
--- // StarterGui.AutoGui.BowSpeed.Speed \\ --
-UI["20"] = Instance.new("NumberValue", UI["1b"])
-UI["20"]["Name"] = [[Speed]]
-
--- // StarterGui.AutoGui.AxeSpeed \\ --
-UI["21"] = Instance.new("Frame", UI["1"])
-UI["21"]["BorderSizePixel"] = 0
-UI["21"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
-UI["21"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
-UI["21"]["Size"] = UDim2.new(0.1, 0, 0.1, 0)
-UI["21"]["Position"] = UDim2.new(0.4, 40, 0.1, 0)
-UI["21"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["21"]["Name"] = [[AxeSpeed]]
-
--- // StarterGui.AutoGui.AxeSpeed.UIAspectRatioConstraint \\ --
-UI["22"] = Instance.new("UIAspectRatioConstraint", UI["21"])
-UI["22"]["AspectRatio"] = 1.64673
-
--- // StarterGui.AutoGui.AxeSpeed.UICorner \\ --
-UI["23"] = Instance.new("UICorner", UI["21"])
-
-
--- // StarterGui.AutoGui.AxeSpeed.UIStroke \\ --
-UI["24"] = Instance.new("UIStroke", UI["21"])
-UI["24"]["Thickness"] = 1.5
-UI["24"]["Color"] = Color3.fromRGB(0, 86, 255)
-
--- // StarterGui.AutoGui.AxeSpeed.TextBox \\ --
-UI["25"] = Instance.new("TextBox", UI["21"])
-UI["25"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
-UI["25"]["BorderSizePixel"] = 0
-UI["25"]["TextSize"] = 14
-UI["25"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
-UI["25"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-UI["25"]["Size"] = UDim2.new(1, 0, 1, 0)
-UI["25"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["25"]["Text"] = [[سرعه الفاس]]
-UI["25"]["BackgroundTransparency"] = 1
-
--- // StarterGui.AutoGui.AxeSpeed.Speed \\ --
-UI["26"] = Instance.new("NumberValue", UI["21"])
-UI["26"]["Name"] = [[Speed]]
-
--- Require G2L wrapper
-local G2L_REQUIRE = require;
-local G2L_MODULES = {};
-local function require(Module:ModuleScript)
-	local ModuleState = G2L_MODULES[Module];
-	if ModuleState then
-		if not ModuleState.Required then
-			ModuleState.Required = true;
-			ModuleState.Value = ModuleState.Closure();
-		end
-		return ModuleState.Value;
-	end;
-	return G2L_REQUIRE(Module);
-end
-
-G2L_MODULES[UI["c"]] = {
-	Closure = function()
-		local script = UI["c"]
-		local z = {}
-		local plr = game.Players.LocalPlayer
-		local Cam = workspace.CurrentCamera
-		m = plr:GetMouse()
-		function z:getMouseTargetScale(frame)
-			local x,y = m.ViewSizeX * frame.Position.X.Scale,m.ViewSizeY * frame.Position.Y.Scale 
-			local mousePos = Vector2.new(x, y)
-			local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
-			local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
-			local part, position = workspace:FindPartOnRay(ray, plr.Character)
-
-			return {part, position}
-		end
-		function z:getMouseTargetOffset(frame:Frame)
-			local x,y = frame.Position.X.Offset,frame.Position.Y.Offset
-			local mousePos = Vector2.new(x, y)
-			local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
-			local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
-			local part, position = workspace:FindPartOnRay(ray, plr.Character)
-
-			return {part, position}
-		end
-		function z:getTargetSurface(part, position)
-			if part == nil then
-				return nil
-			end
-			local partSize = part.Size
-			local partPosition = part.Position
-
-			local difference = position - partPosition
-
-			local absDifference = Vector3.new(math.abs(difference.X), math.abs(difference.Y), math.abs(difference.Z))
-
-			if absDifference.X > absDifference.Y and absDifference.X > absDifference.Z then
-				if difference.X > 0 then
-					return Enum.NormalId.Right
-				else
-					return Enum.NormalId.Left
-				end
-			elseif absDifference.Y > absDifference.X and absDifference.Y > absDifference.Z then
-				if difference.Y > 0 then
-					return Enum.NormalId.Top
-				else
-					return Enum.NormalId.Bottom
-				end
-			else
-				if difference.Z > 0 then
-					return Enum.NormalId.Front
-				else
-					return Enum.NormalId.Back
-				end
-			end
-		end
-		cooldowns = {
-			["block"] = script.Parent:WaitForChild("blockSpeed"):WaitForChild("Speed"),
-			["sword"] = script.Parent:WaitForChild("SwordSpeed"):WaitForChild("Speed"),
-			["bow"] = script.Parent:WaitForChild("BowSpeed"):WaitForChild("Speed"),
-			["axe"] = script.Parent:WaitForChild("AxeSpeed"):WaitForChild("Speed"),
-		}
-
-		function z:Click()
-			local range = 99e9
-			local player = game.Players.LocalPlayer
-			local tool = script.Parent.eqTool.Value
-			if tool == nil then return end
-			-- print(tool.Name)
-			local FolderD = script.Parent:WaitForChild("data")
-			local p = game.Players:GetPlayers()
-
-			if tool.Name == "Sword" then --Sword Auto
-				tool:Activate()
-				task.wait(cooldowns[tool.Name:lower()].Value)
-			end
-
-			if tool.Name == "Bow" then --Bow Auto
-				task.spawn(function() -- to cancel waiting
-					tool:WaitForChild("ServerControl"):InvokeServer(true)
-					tool:WaitForChild("ServerControl"):InvokeServer(false)
-				end)
-				task.wait(cooldowns[tool.Name:lower()].Value)
-			end	
-			if tool.Name == "Axe" then -- Pickaxe Auto
-				if game.Players.LocalPlayer:GetMouse().Target == nil then
-					return 
-				end
-				local args = {
-					[1] = game.Players.LocalPlayer:GetMouse().Target
-				}
-				tool:WaitForChild("RemoteEvent"):FireServer(unpack(args))
-				tool:Activate()
-				task.wait(cooldowns[tool.Name:lower()].Value)
-			end	
-			if tool.Name == "Block" then
-				tool:Activate()
-				task.wait(cooldowns[tool.Name:lower()].Value)
-			end	
-			if tool:FindFirstChild("drink") then -- any poitons
-				tool:Activate()
-				task.wait()
-			end	
-			if tool.Name == "Shield" then -- Shield
-				tool:Activate()
-				task.wait()
-			end
-		end
-		return z
-
-	end
-}
--- // StarterGui.AutoGui.LocalScript \\ --
-local function SCRIPT_4()
-	local script = UI["4"]
-	local p = game.Players.LocalPlayer
-	m = p:GetMouse()
-	local screen = script.Parent
-	local posM = screen.posM
-	local auto= screen.auto
-	DholdingForEdit = 1
-	local Module = require(script.Parent:WaitForChild("ModuleScript"))
-	local D = {
-		ColorOn = Color3.fromRGB(85, 170, 127);
-		ColorOff = Color3.fromRGB(170, 87, 88);
-		EditMode = Color3.fromRGB(85, 85, 255)
-	}
-	cooldowns = {
-		["block"] = script.Parent:WaitForChild("blockSpeed"):WaitForChild("Speed"),
-		["sword"] = script.Parent:WaitForChild("SwordSpeed"):WaitForChild("Speed"),
-		["bow"] = script.Parent:WaitForChild("BowSpeed"):WaitForChild("Speed"),
-		["axe"] = script.Parent:WaitForChild("AxeSpeed"):WaitForChild("Speed"),
-	}
-	-- EDIT SETS
-	startMove= false
-	M_isonBtn = false
-	-- set eqtool
-	task.spawn(function()
-		local p = game.Players.LocalPlayer
-		while task.wait() do
-			if p.Character and p.Character:FindFirstChildOfClass("Tool") then
-				script.Parent:WaitForChild("eqTool").Value = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
-			else
-				script.Parent:WaitForChild("eqTool").Value = nil
-			end
-		end
-	end)
-
-	--TextSpeed
-	task.spawn(function()
-		for i,v in pairs(cooldowns) do
-
-
-			local txtbox:TextBox = v.Parent:WaitForChild("TextBox")
-			txtbox.FocusLost:Connect(function()
-				txt = txtbox.Text
-				if tonumber(txt) == nil then
-					print("ERROR: you cant use letters on the speed")
+-- Do auto true or false
+task.spawn(function()
+	auto.F.MouseButton1Down:Connect(function()
+		holdTime = DholdingForEdit
+		print("started")
+		if auto:WaitForChild("EditMode").Value == false then
+			for i=1,holdTime*100 do
+				task.wait(holdTime/100)
+				if hold ~= true then
 					return nil
 				end
-				if tonumber(txt)/100 <= 0 then -- that mean try again
-					print("ERROR: you cant use this number")
-					return nil
-				end
-
-				v.Value = tonumber(txt)/100
-				game.TweenService:Create(txtbox.Parent,TweenInfo.new(.5),{BackgroundTransparency = 1}):Play()
-				game.TweenService:Create(txtbox.Parent.UIStroke,TweenInfo.new(.5),{Transparency = 1}):Play()
-				game.TweenService:Create(txtbox,TweenInfo.new(.5),{TextTransparency = 1}):Play()
-			end)
+			end
+			auto:WaitForChild("EditMode").Value = true
+		end
+	end)
+	auto.F.MouseButton1Up:Connect(function()
+		if auto:WaitForChild("EditMode").Value == true then
+			auto:WaitForChild("EditMode").Value = false
+		end
+	end)
+	auto.F.MouseButton1Up:Connect(function()
+		if auto:WaitForChild("EditMode").Value == true then
+		else
+			auto:WaitForChild("Start").Value = not auto:WaitForChild("Start").Value
 		end
 	end)
 
-	-- pos mouse
-	task.spawn(function()
-		game["Run Service"].RenderStepped:Connect(function()
-			posM.Position = UDim2.new(0,m.X,0,m.Y)
-		end)
-	end)
-	-- Do auto true or false
-	task.spawn(function()
-		auto.F.MouseButton1Down:Connect(function()
-			if auto:WaitForChild("EditMode").Value == false then
-
-				for i=1,DholdingForEdit*10,1 do
-					wait(DholdingForEdit/10)
-					if startMove == false then
-						return nil
-					end
-				end
-				auto:WaitForChild("EditMode").Value = true
-			end
-		end)
-		auto.F.MouseButton1Up:Connect(function()
-			if auto:WaitForChild("EditMode").Value == true then
-				auto:WaitForChild("EditMode").Value = false
-			end
-		end)
-		auto.F.MouseButton1Up:Connect(function()
+	game.UserInputService.InputBegan:Connect(function(k)
+		if k.KeyCode == Enum.KeyCode.E then
 			if auto:WaitForChild("EditMode").Value == true then
 			else
 				auto:WaitForChild("Start").Value = not auto:WaitForChild("Start").Value
 			end
-		end)
-
-		game.UserInputService.InputBegan:Connect(function(k)
-			if k.KeyCode == Enum.KeyCode.E then
-				if auto:WaitForChild("EditMode").Value == true then
-				else
-					auto:WaitForChild("Start").Value = not auto:WaitForChild("Start").Value
-				end
-			end
-		end)
-	end)
-
-
-	-- script autoClicker
-	for i,v in pairs(cooldowns) do
-		repeat wait() until v.Value > 0
-	end
-	local function updateColors(v)
-		if v then
-			game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
-			game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
-		else
-			game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.ColorOff}):Play()
-			game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.ColorOff}):Play()
-		end
-	end
-	task.spawn(function()
-
-
-		local v = false
-		auto.Start.Value = v
-		updateColors(v)
-		wait()
-		auto.Start.Changed:Connect(function()
-			v = auto.Start.Value
-			updateColors(v)
-		end)
-	end)
-	-- script editMode
-
-	task.spawn(function()
-		auto.F.MouseEnter:Connect(function()
-			M_isonBtn = true
-		end)
-		auto.F.MouseLeave:Connect(function()
-			M_isonBtn = false
-		end)
-		auto.F.MouseButton1Down:Connect(function()
-			startMove = M_isonBtn
-		end)
-		auto.F.MouseButton1Up:Connect(function()
-			startMove = false
-		end)
-		auto:WaitForChild("EditMode").Changed:Connect(function()
-			if auto:WaitForChild("EditMode").Value == true then
-				auto.Start.Value = false
-				game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.EditMode}):Play()
-				game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.EditMode}):Play()
-			else
-				updateColors(auto:WaitForChild("Start").Value)
-			end
-		end)
-	end)
-	-- loop edit
-	task.spawn(function()
-
-		while task.wait() do
-			enable = auto:WaitForChild("EditMode").Value
-			if enable == true and startMove then
-				game.TweenService:Create(auto,TweenInfo.new(.2),{Position = UDim2.new(0,m.X,0,m.Y)}):Play()
-			end
 		end
 	end)
-	-- loop auto
-	task.spawn(function()
-		while true do
-			if auto.Start.Value then
-				if script.Parent:WaitForChild("eqTool").Value ~= nil then
-					-- function click
-					Module:Click()
-				end
-			end
-			task.wait()
-		end
-	end)
+end)
 
+
+-- script autoClicker
+for i,v in pairs(cooldowns) do
+	repeat wait() until v.Value > 0
 end
-task.spawn(SCRIPT_4)
+local function updateColors(v)
+	if v then
+		game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
+		game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
+	else
+		game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.ColorOff}):Play()
+		game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.ColorOff}):Play()
+	end
+end
+task.spawn(function()
 
-return UI["1"], require;
+
+	local v = false
+	auto.Start.Value = v
+	updateColors(v)
+	wait()
+	auto.Start.Changed:Connect(function()
+		v = auto.Start.Value
+		updateColors(v)
+	end)
+end)
+-- script editMode
+
+task.spawn(function()
+	auto:WaitForChild("EditMode").Changed:Connect(function()
+		if auto:WaitForChild("EditMode").Value == true then
+			auto.Start.Value = false
+			game.TweenService:Create(auto.UIStroke,TweenInfo.new(.5),{Color = D.EditMode}):Play()
+			game.TweenService:Create(posM.UIStroke,TweenInfo.new(.5),{Color = D.EditMode}):Play()
+		else
+			updateColors(auto:WaitForChild("Start").Value)
+		end
+	end)
+end)
+-- loop edit
+task.spawn(function()
+
+	while task.wait() do
+		enable = auto:WaitForChild("EditMode").Value
+		if enable == true then
+			game.TweenService:Create(auto,TweenInfo.new(.2),{Position = UDim2.new(0,p:GetMouse().X,0,p:GetMouse().Y)}):Play()
+		end
+	end
+end)
+-- loop auto
+task.spawn(function()
+	while true do
+		if auto.Start.Value then
+			if script.Parent:WaitForChild("eqTool").Value ~= nil then
+				-- function click
+				Module:Click()
+			end
+		end
+		task.wait()
+	end
+end)
