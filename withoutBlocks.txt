@@ -10,17 +10,23 @@ local touchGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("TouchGui")
 if touchGui then
 	print(touchGui)
 	touchGui.Name = "touchGui-oof"
+	touchGui.Enabled = false
 end
+--fix auto blocks
+task.spawn(function()
+	local h:Humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+	h.Died:Connect(function()
+		touchGui.Name = "TouchGui"
+	end)
+	game.Players.LocalPlayer.CharacterAdded:Connect(function()
+		wait(.1)
+		touchGui.Name = "touchGui-oof"
+	end)
+end)
 
--- // INSTANCES: 38 | SCRIPTS: 1 | MODULES: 1 \\ --
+-- // INSTANCES: 47 | SCRIPTS: 1 | MODULES: 1 \\ --
 
 local UI = {}
-
-
--- // StarterGui.ShfitLock \\ --
---if game["Run Service"]:IsStudio() ~= true then
---loadstring(game:HttpGet(('https://raw.githubusercontent.com/yahyaYhia752/coding-D/main/ShiftLock.txt'),true))()
---end
 
 -- // StarterGui.AutoGui \\ --
 UI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
@@ -259,136 +265,197 @@ UI["25"]["BackgroundTransparency"] = 1
 UI["26"] = Instance.new("NumberValue", UI["21"])
 UI["26"]["Name"] = [[Speed]]
 
+-- // StarterGui.AutoGui.Tools \\ --
+UI["27"] = Instance.new("Frame", UI["1"])
+UI["27"]["Visible"] = false
+UI["27"]["BorderSizePixel"] = 0
+UI["27"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["27"]["AnchorPoint"] = Vector2.new(1, 1)
+UI["27"]["Size"] = UDim2.new(0, 100, 0, 40)
+UI["27"]["Position"] = UDim2.new(0.86, 0, 0.75, 0)
+UI["27"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["27"]["Name"] = [[Tools]]
+UI["27"]["BackgroundTransparency"] = 1
+
+-- // StarterGui.AutoGui.Tools.auto \\ --
+UI["28"] = Instance.new("Frame", UI["27"])
+UI["28"]["BorderSizePixel"] = 0
+UI["28"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
+UI["28"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["28"]["Size"] = UDim2.new(1, 0, 1, 0)
+UI["28"]["Position"] = UDim2.new(0, 40, 0.1, 0)
+UI["28"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["28"]["Name"] = [[auto]]
+
+-- // StarterGui.AutoGui.Tools.auto.UIAspectRatioConstraint \\ --
+UI["29"] = Instance.new("UIAspectRatioConstraint", UI["28"])
+UI["29"]["AspectRatio"] = 1.2
+
+-- // StarterGui.AutoGui.Tools.auto.Start \\ --
+UI["2a"] = Instance.new("BoolValue", UI["28"])
+UI["2a"]["Name"] = [[Start]]
+
+-- // StarterGui.AutoGui.Tools.auto.UICorner \\ --
+UI["2b"] = Instance.new("UICorner", UI["28"])
+
+
+-- // StarterGui.AutoGui.Tools.auto.UIStroke \\ --
+UI["2c"] = Instance.new("UIStroke", UI["28"])
+UI["2c"]["Thickness"] = 1.5
+UI["2c"]["Color"] = Color3.fromRGB(107, 107, 107)
+
+-- // StarterGui.AutoGui.Tools.auto.EditMode \\ --
+UI["2d"] = Instance.new("BoolValue", UI["28"])
+UI["2d"]["Name"] = [[EditMode]]
+
+-- // StarterGui.AutoGui.Tools.auto.ImageButton \\ --
+UI["2e"] = Instance.new("ImageButton", UI["28"])
+UI["2e"]["BorderSizePixel"] = 0
+UI["2e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["2e"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["2e"]["Image"] = [[rbxassetid://15317582625]]
+UI["2e"]["Size"] = UDim2.new(0.7, 0, 0.7, 0)
+UI["2e"]["BackgroundTransparency"] = 1
+UI["2e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["2e"]["Position"] = UDim2.new(0.5, 0, 0.5, 0)
+
+-- // StarterGui.AutoGui.Tools.UIListLayout \\ --
+UI["2f"] = Instance.new("UIListLayout", UI["27"])
+UI["2f"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Right
+UI["2f"]["Padding"] = UDim.new(0, 5)
+UI["2f"]["SortOrder"] = Enum.SortOrder.LayoutOrder
+UI["2f"]["FillDirection"] = Enum.FillDirection.Horizontal
+
 -- Require G2L wrapper
 local G2L_REQUIRE = require;
 local G2L_MODULES = {};
 local function require(Module:ModuleScript)
-	local ModuleState = G2L_MODULES[Module];
-	if ModuleState then
-		if not ModuleState.Required then
-			ModuleState.Required = true;
-			ModuleState.Value = ModuleState.Closure();
-		end
-		return ModuleState.Value;
-	end;
-	return G2L_REQUIRE(Module);
+    local ModuleState = G2L_MODULES[Module];
+    if ModuleState then
+        if not ModuleState.Required then
+            ModuleState.Required = true;
+            ModuleState.Value = ModuleState.Closure();
+        end
+        return ModuleState.Value;
+    end;
+    return G2L_REQUIRE(Module);
 end
 
 G2L_MODULES[UI["c"]] = {
-	Closure = function()
-		local script = UI["c"]
-		local z = {}
-		local plr = game.Players.LocalPlayer
-		local Cam = workspace.CurrentCamera
-		m = plr:GetMouse()
-		function z:getMouseTargetScale(frame)
-			local x,y = m.ViewSizeX * frame.Position.X.Scale,m.ViewSizeY * frame.Position.Y.Scale 
-			local mousePos = Vector2.new(x, y)
-			local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
-			local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
-			local part, position = workspace:FindPartOnRay(ray, plr.Character)
+Closure = function()
+    local script = UI["c"]
+local z = {}
+local plr = game.Players.LocalPlayer
+local Cam = workspace.CurrentCamera
+m = plr:GetMouse()
+function z:getMouseTargetScale(frame)
+	local x,y = m.ViewSizeX * frame.Position.X.Scale,m.ViewSizeY * frame.Position.Y.Scale 
+	local mousePos = Vector2.new(x, y)
+	local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
+	local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
+	local part, position = workspace:FindPartOnRay(ray, plr.Character)
 
-			return {part, position}
-		end
-		function z:getMouseTargetOffset(frame:Frame)
-			local x,y = frame.Position.X.Offset,frame.Position.Y.Offset
-			local mousePos = Vector2.new(x, y)
-			local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
-			local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
-			local part, position = workspace:FindPartOnRay(ray, plr.Character)
+	return {part, position}
+end
+function z:getMouseTargetOffset(frame:Frame)
+	local x,y = frame.Position.X.Offset,frame.Position.Y.Offset
+	local mousePos = Vector2.new(x, y)
+	local unitRay = Cam:ScreenPointToRay(mousePos.X, mousePos.Y)
+	local ray = Ray.new(unitRay.Origin, unitRay.Direction * 1000)
+	local part, position = workspace:FindPartOnRay(ray, plr.Character)
 
-			return {part, position}
-		end
-		function z:getTargetSurface(part, position)
-			if part == nil then
-				return nil
-			end
-			local partSize = part.Size
-			local partPosition = part.Position
-
-			local difference = position - partPosition
-
-			local absDifference = Vector3.new(math.abs(difference.X), math.abs(difference.Y), math.abs(difference.Z))
-
-			if absDifference.X > absDifference.Y and absDifference.X > absDifference.Z then
-				if difference.X > 0 then
-					return Enum.NormalId.Right
-				else
-					return Enum.NormalId.Left
-				end
-			elseif absDifference.Y > absDifference.X and absDifference.Y > absDifference.Z then
-				if difference.Y > 0 then
-					return Enum.NormalId.Top
-				else
-					return Enum.NormalId.Bottom
-				end
-			else
-				if difference.Z > 0 then
-					return Enum.NormalId.Front
-				else
-					return Enum.NormalId.Back
-				end
-			end
-		end
-		cooldowns = {
-			["block"] = script.Parent:WaitForChild("blockSpeed"):WaitForChild("Speed"),
-			["sword"] = script.Parent:WaitForChild("SwordSpeed"):WaitForChild("Speed"),
-			["bow"] = script.Parent:WaitForChild("BowSpeed"):WaitForChild("Speed"),
-			["axe"] = script.Parent:WaitForChild("AxeSpeed"):WaitForChild("Speed"),
-		}
-
-		function z:Click()
-			local range = 99e9
-			local player = game.Players.LocalPlayer
-			local tool = script.Parent.eqTool.Value
-			if tool == nil then return end
-			-- print(tool.Name)
-			local FolderD = script.Parent:WaitForChild("data")
-			local p = game.Players:GetPlayers()
-
-			if tool.Name == "Sword" then --Sword Auto
-				tool:Activate()
-				task.wait(cooldowns[tool.Name:lower()].Value)
-			end
-
-			if tool.Name == "Bow" then --Bow Auto
-				task.spawn(function() -- to cancel waiting
-					tool:WaitForChild("ServerControl"):InvokeServer(true)
-					tool:WaitForChild("ServerControl"):InvokeServer(false)
-				end)
-				task.wait(cooldowns[tool.Name:lower()].Value)
-			end	
-			if tool.Name == "Axe" then -- Pickaxe Auto
-				if game.Players.LocalPlayer:GetMouse().Target == nil then
-					return 
-				end
-				local args = {
-					[1] = game.Players.LocalPlayer:GetMouse().Target
-				}
-				tool:WaitForChild("RemoteEvent"):FireServer(unpack(args))
-				tool:Activate()
-				task.wait(cooldowns[tool.Name:lower()].Value)
-			end	
-			if tool.Name == "Block" then
-				tool:Activate()
-				task.wait(cooldowns[tool.Name:lower()].Value)
-			end	
-			if tool:FindFirstChild("drink") then -- any poitons
-				tool:Activate()
-				task.wait()
-			end	
-			if tool.Name == "Shield" then -- Shield
-				tool:Activate()
-				task.wait()
-			end
-		end
-		return z
-
+	return {part, position}
+end
+function z:getTargetSurface(part, position)
+	if part == nil then
+		return nil
 	end
+	local partSize = part.Size
+	local partPosition = part.Position
+
+	local difference = position - partPosition
+
+	local absDifference = Vector3.new(math.abs(difference.X), math.abs(difference.Y), math.abs(difference.Z))
+
+	if absDifference.X > absDifference.Y and absDifference.X > absDifference.Z then
+		if difference.X > 0 then
+			return Enum.NormalId.Right
+		else
+			return Enum.NormalId.Left
+		end
+	elseif absDifference.Y > absDifference.X and absDifference.Y > absDifference.Z then
+		if difference.Y > 0 then
+			return Enum.NormalId.Top
+		else
+			return Enum.NormalId.Bottom
+		end
+	else
+		if difference.Z > 0 then
+			return Enum.NormalId.Front
+		else
+			return Enum.NormalId.Back
+		end
+	end
+end
+cooldowns = {
+	["block"] = script.Parent:WaitForChild("blockSpeed"):WaitForChild("Speed"),
+	["sword"] = script.Parent:WaitForChild("SwordSpeed"):WaitForChild("Speed"),
+	["bow"] = script.Parent:WaitForChild("BowSpeed"):WaitForChild("Speed"),
+	["axe"] = script.Parent:WaitForChild("AxeSpeed"):WaitForChild("Speed"),
+}
+
+function z:Click()
+	local range = 99e9
+	local player = game.Players.LocalPlayer
+	local tool = script.Parent.eqTool.Value
+	if tool == nil then return end
+	-- print(tool.Name)
+	local FolderD = script.Parent:WaitForChild("data")
+	local p = game.Players:GetPlayers()
+
+	if tool.Name == "Sword" then --Sword Auto
+		tool:Activate()
+		task.wait(cooldowns[tool.Name:lower()].Value)
+	end
+
+	if tool.Name == "Bow" then --Bow Auto
+		task.spawn(function() -- to cancel waiting
+			tool:WaitForChild("ServerControl"):InvokeServer(true)
+			tool:WaitForChild("ServerControl"):InvokeServer(false)
+		end)
+		task.wait(cooldowns[tool.Name:lower()].Value)
+	end	
+	if tool.Name == "Axe" then -- Pickaxe Auto
+		if game.Players.LocalPlayer:GetMouse().Target == nil then
+			return 
+		end
+		local args = {
+			[1] = game.Players.LocalPlayer:GetMouse().Target
+		}
+		tool:WaitForChild("RemoteEvent"):FireServer(unpack(args))
+		tool:Activate()
+		task.wait(cooldowns[tool.Name:lower()].Value)
+	end	
+	if tool.Name == "Block" then
+		tool:Activate()
+		task.wait(cooldowns[tool.Name:lower()].Value)
+	end	
+	if tool:FindFirstChild("drink") then -- any poitons
+		tool:Activate()
+		task.wait()
+	end	
+	if tool.Name == "Shield" then -- Shield
+		tool:Activate()
+		task.wait()
+	end
+end
+return z
+
+end
 }
 -- // StarterGui.AutoGui.LocalScript \\ --
 local function SCRIPT_4()
-	local script = UI["4"]
+local script = UI["4"]
 	local p = game.Players.LocalPlayer
 	m = p:GetMouse()
 	local screen = script.Parent
@@ -401,15 +468,14 @@ local function SCRIPT_4()
 		ColorOff = Color3.fromRGB(170, 87, 88);
 		EditMode = Color3.fromRGB(85, 85, 255)
 	}
+	hold = false
 	cooldowns = {
 		["block"] = script.Parent:WaitForChild("blockSpeed"):WaitForChild("Speed"),
 		["sword"] = script.Parent:WaitForChild("SwordSpeed"):WaitForChild("Speed"),
 		["bow"] = script.Parent:WaitForChild("BowSpeed"):WaitForChild("Speed"),
 		["axe"] = script.Parent:WaitForChild("AxeSpeed"):WaitForChild("Speed"),
 	}
-	-- EDIT SETS
-	startMove= false
-	M_isonBtn = false
+	
 	-- set eqtool
 	task.spawn(function()
 		local p = game.Players.LocalPlayer
@@ -421,12 +487,12 @@ local function SCRIPT_4()
 			end
 		end
 	end)
-
+	
 	--TextSpeed
 	task.spawn(function()
 		for i,v in pairs(cooldowns) do
-
-
+	
+	
 			local txtbox:TextBox = v.Parent:WaitForChild("TextBox")
 			txtbox.FocusLost:Connect(function()
 				txt = txtbox.Text
@@ -438,7 +504,7 @@ local function SCRIPT_4()
 					print("ERROR: you cant use this number")
 					return nil
 				end
-
+	
 				v.Value = tonumber(txt)/100
 				game.TweenService:Create(txtbox.Parent,TweenInfo.new(.5),{BackgroundTransparency = 1}):Play()
 				game.TweenService:Create(txtbox.Parent.UIStroke,TweenInfo.new(.5),{Transparency = 1}):Play()
@@ -446,21 +512,32 @@ local function SCRIPT_4()
 			end)
 		end
 	end)
-
+	
 	-- pos mouse
 	task.spawn(function()
 		game["Run Service"].RenderStepped:Connect(function()
 			posM.Position = UDim2.new(0,m.X,0,m.Y)
 		end)
 	end)
+	-- set if button is hold or not
+	task.spawn(function()
+		auto.F.MouseButton1Down:Connect(function()
+			hold = true
+		end)
+		auto.F.MouseButton1Up:Connect(function()
+			hold = false
+		end)
+	end)
+	
 	-- Do auto true or false
 	task.spawn(function()
 		auto.F.MouseButton1Down:Connect(function()
+			holdTime = DholdingForEdit
+			print("started")
 			if auto:WaitForChild("EditMode").Value == false then
-
-				for i=1,DholdingForEdit*10,1 do
-					wait(DholdingForEdit/10)
-					if startMove == false then
+				for i=1,holdTime*100 do
+					task.wait(holdTime/100)
+					if hold ~= true then
 						return nil
 					end
 				end
@@ -478,7 +555,7 @@ local function SCRIPT_4()
 				auto:WaitForChild("Start").Value = not auto:WaitForChild("Start").Value
 			end
 		end)
-
+	
 		game.UserInputService.InputBegan:Connect(function(k)
 			if k.KeyCode == Enum.KeyCode.E then
 				if auto:WaitForChild("EditMode").Value == true then
@@ -488,8 +565,8 @@ local function SCRIPT_4()
 			end
 		end)
 	end)
-
-
+	
+	
 	-- script autoClicker
 	for i,v in pairs(cooldowns) do
 		repeat wait() until v.Value > 0
@@ -504,8 +581,8 @@ local function SCRIPT_4()
 		end
 	end
 	task.spawn(function()
-
-
+	
+	
 		local v = false
 		auto.Start.Value = v
 		updateColors(v)
@@ -516,20 +593,8 @@ local function SCRIPT_4()
 		end)
 	end)
 	-- script editMode
-
+	
 	task.spawn(function()
-		auto.F.MouseEnter:Connect(function()
-			M_isonBtn = true
-		end)
-		auto.F.MouseLeave:Connect(function()
-			M_isonBtn = false
-		end)
-		auto.F.MouseButton1Down:Connect(function()
-			startMove = M_isonBtn
-		end)
-		auto.F.MouseButton1Up:Connect(function()
-			startMove = false
-		end)
 		auto:WaitForChild("EditMode").Changed:Connect(function()
 			if auto:WaitForChild("EditMode").Value == true then
 				auto.Start.Value = false
@@ -542,11 +607,11 @@ local function SCRIPT_4()
 	end)
 	-- loop edit
 	task.spawn(function()
-
+	
 		while task.wait() do
 			enable = auto:WaitForChild("EditMode").Value
-			if enable == true and startMove then
-				game.TweenService:Create(auto,TweenInfo.new(.2),{Position = UDim2.new(0,m.X,0,m.Y)}):Play()
+			if enable == true then
+				game.TweenService:Create(auto,TweenInfo.new(.2),{Position = UDim2.new(0,p:GetMouse().X,0,p:GetMouse().Y)}):Play()
 			end
 		end
 	end)
@@ -562,7 +627,7 @@ local function SCRIPT_4()
 			task.wait()
 		end
 	end)
-
+	
 end
 task.spawn(SCRIPT_4)
 
