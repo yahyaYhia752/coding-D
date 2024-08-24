@@ -7,6 +7,12 @@ if _G.AutoClickerStart_Welp then
 end
 _G.AutoClickerStart_Welp = true
 local touchGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("TouchGui")
+for i,v in pairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
+	if v:FindFirstChild("TouchControlFrame") then
+	else
+		touchGui = v
+	end
+end
 if touchGui then
 	print(touchGui)
 	touchGui.Name = "touchGui-oof"
@@ -23,6 +29,7 @@ task.spawn(function()
 		touchGui.Name = "touchGui-oof"
 	end)
 end)
+
 -- // INSTANCES: 38 | SCRIPTS: 1 | MODULES: 1 \\ --
 
 local UI = {}
