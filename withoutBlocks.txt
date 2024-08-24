@@ -9,12 +9,12 @@ _G.AutoClickerStart_Welp = true
 local touchGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("TouchGui")
 
 if touchGui then
+touchGui.Name = "TouchGui1"
 	task.spawn(function()
-		while true do
+		while wait(1) do
 			game.Players.LocalPlayer.PlayerGui:WaitForChild("TouchGui1").Name = "TouchGui"
 			wait()
 			game.Players.LocalPlayer.PlayerGui:WaitForChild("TouchGui").Name = "TouchGui1"
-			wait(1)
 		end 
 	end)
 end
