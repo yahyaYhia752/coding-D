@@ -17,6 +17,7 @@ game.Players.LocalPlayer.CharacterAdded:Connect(function()
 	setScreen()
 end)
 game.Players.LocalPlayer.Chatted:Connect(function(msg)
+	prefix = "/e"
 	cmd = "code"
 	argsMsg = msg:split(" ")
 	if argsMsg[1] == prefix and argsMsg[2]:lower() == "cmd" then
