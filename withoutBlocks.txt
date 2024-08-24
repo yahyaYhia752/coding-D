@@ -1,7 +1,7 @@
 repeat wait() until game:IsLoaded()
 print("Loaded!!")
 
-
+_G.Mobile = false
 if _G.AutoClickerStart_Welp then
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("AutoGui"):Destroy()
 end
@@ -9,15 +9,22 @@ _G.AutoClickerStart_Welp = true
 local touchGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("TouchGui")
 
 if touchGui then
-touchGui.Name = "TouchGui1"
+	_G.Mobile = true
+	touchGui.Name = "TouchGui1"
 	task.spawn(function()
 		while wait(1) do
+			uis = game.Players.LocalPlayer.PlayerGui
+			local GameGui = uis:WaitForChild("ScreenGui")
+			GameGui:WaitForChild("PotionButton").Visible = true
+			GameGui:WaitForChild("PickAxeButton").Visible = true
+			game.Players.LocalPlayer.PlayerGui:WaitForChild("Shiftlock"):WaitForChild("ImageButton").Visible = true
 			game.Players.LocalPlayer.PlayerGui:WaitForChild("TouchGui1").Name = "TouchGui"
 			wait()
 			game.Players.LocalPlayer.PlayerGui:WaitForChild("TouchGui").Name = "TouchGui1"
 		end 
 	end)
 end
+
 --fix auto blocks
 task.spawn(function()
 	local h:Humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
