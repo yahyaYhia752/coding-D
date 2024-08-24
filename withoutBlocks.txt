@@ -15,7 +15,7 @@ setScreen = function()
 	--GuiGame:WaitForChild("PromoFrame").Visible = false
 	GuiGame:WaitForChild("CoinFrame").Position = UDim2.new(.86,0,.3,0)
 end
-set screenForMobile
+--set screenForMobile
 task.spawn(function()
 	game["Run Service"].RenderStepped:Connect(function()
 		if _G.Mobile_752 == true then
