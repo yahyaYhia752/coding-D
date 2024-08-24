@@ -12,11 +12,11 @@ if touchGui then
 	_G.Mobile = true
 	touchGui.Name = "TouchGui1"
 	task.spawn(function()
-		while wait(1) do
-			game.Players.LocalPlayer.PlayerGui:WaitForChild("TouchGui1").Name = "TouchGui"
-			wait()
-			game.Players.LocalPlayer.PlayerGui:WaitForChild("TouchGui").Name = "TouchGui1"
-		end 
+		while task.wait() do
+			for i,v in pairs(touchGui:WaitForChild("TouchControlFrame"):GetChildren()) do
+				v.Visible = true
+			end
+		end
 	end)
 end
 
@@ -30,28 +30,30 @@ task.spawn(function()
 		intheGame = false
 	end)
 	game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function()
-		intheGame = true
+		if _G.Mobile == true then
+			intheGame = true
+		end
 	end)
 	game["Run Service"].RenderStepped:Connect(function()
 		uis = game.Players.LocalPlayer.PlayerGui
 		local GameGui = uis:WaitForChild("ScreenGui")
-		if intheGame == true then
-			GameGui:WaitForChild("PotionButton").Visible = true
-			GameGui:WaitForChild("PickAxeButton").Visible = true
-		else
-			GameGui:WaitForChild("PotionButton").Visible = false
-			GameGui:WaitForChild("PickAxeButton").Visible = false
-		end
+		--if intheGame == true then
+		--	GameGui:WaitForChild("PotionButton").Visible = true
+		--	GameGui:WaitForChild("PickAxeButton").Visible = true
+		--else
+		--	GameGui:WaitForChild("PotionButton").Visible = false
+		--	GameGui:WaitForChild("PickAxeButton").Visible = false
+		--end
 		uis:WaitForChild("Shiftlock"):WaitForChild("ImageButton").Visible = true
 	end)
 end)
 
--- // INSTANCES: 47 | SCRIPTS: 1 | MODULES: 1 \\ --
+-- // INSTANCES: 54 | SCRIPTS: 1 | MODULES: 1 \\ --
 
 local UI = {}
 
 -- // StarterGui.AutoGui \\ --
-UI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
+UI["1"] = Instance.new("ScreenGui", game.CoreGui)
 UI["1"]["Name"] = [[AutoGui]]
 UI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
 UI["1"]["ResetOnSpawn"] = false
@@ -289,7 +291,6 @@ UI["26"]["Name"] = [[Speed]]
 
 -- // StarterGui.AutoGui.Tools \\ --
 UI["27"] = Instance.new("Frame", UI["1"])
-UI["27"]["Visible"] = false
 UI["27"]["BorderSizePixel"] = 0
 UI["27"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
 UI["27"]["AnchorPoint"] = Vector2.new(1, 1)
@@ -299,7 +300,7 @@ UI["27"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
 UI["27"]["Name"] = [[Tools]]
 UI["27"]["BackgroundTransparency"] = 1
 
--- // StarterGui.AutoGui.Tools.auto \\ --
+-- // StarterGui.AutoGui.Tools.1Potions \\ --
 UI["28"] = Instance.new("Frame", UI["27"])
 UI["28"]["BorderSizePixel"] = 0
 UI["28"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
@@ -307,46 +308,87 @@ UI["28"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
 UI["28"]["Size"] = UDim2.new(1, 0, 1, 0)
 UI["28"]["Position"] = UDim2.new(0, 40, 0.1, 0)
 UI["28"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["28"]["Name"] = [[auto]]
+UI["28"]["Name"] = [[1Potions]]
 
--- // StarterGui.AutoGui.Tools.auto.UIAspectRatioConstraint \\ --
+-- // StarterGui.AutoGui.Tools.1Potions.UIAspectRatioConstraint \\ --
 UI["29"] = Instance.new("UIAspectRatioConstraint", UI["28"])
 UI["29"]["AspectRatio"] = 1.2
 
--- // StarterGui.AutoGui.Tools.auto.Start \\ --
-UI["2a"] = Instance.new("BoolValue", UI["28"])
-UI["2a"]["Name"] = [[Start]]
-
--- // StarterGui.AutoGui.Tools.auto.UICorner \\ --
-UI["2b"] = Instance.new("UICorner", UI["28"])
+-- // StarterGui.AutoGui.Tools.1Potions.UICorner \\ --
+UI["2a"] = Instance.new("UICorner", UI["28"])
 
 
--- // StarterGui.AutoGui.Tools.auto.UIStroke \\ --
-UI["2c"] = Instance.new("UIStroke", UI["28"])
-UI["2c"]["Thickness"] = 1.5
-UI["2c"]["Color"] = Color3.fromRGB(107, 107, 107)
+-- // StarterGui.AutoGui.Tools.1Potions.UIStroke \\ --
+UI["2b"] = Instance.new("UIStroke", UI["28"])
+UI["2b"]["Thickness"] = 1.5
+UI["2b"]["Color"] = Color3.fromRGB(107, 107, 107)
 
--- // StarterGui.AutoGui.Tools.auto.EditMode \\ --
-UI["2d"] = Instance.new("BoolValue", UI["28"])
-UI["2d"]["Name"] = [[EditMode]]
+-- // StarterGui.AutoGui.Tools.1Potions.Eq \\ --
+UI["2c"] = Instance.new("BoolValue", UI["28"])
+UI["2c"]["Name"] = [[Eq]]
 
--- // StarterGui.AutoGui.Tools.auto.ImageButton \\ --
-UI["2e"] = Instance.new("ImageButton", UI["28"])
-UI["2e"]["BorderSizePixel"] = 0
-UI["2e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
-UI["2e"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
-UI["2e"]["Image"] = [[rbxassetid://15317582625]]
-UI["2e"]["Size"] = UDim2.new(0.7, 0, 0.7, 0)
-UI["2e"]["BackgroundTransparency"] = 1
-UI["2e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
-UI["2e"]["Position"] = UDim2.new(0.5, 0, 0.5, 0)
+-- // StarterGui.AutoGui.Tools.1Potions.ImageButton \\ --
+UI["2d"] = Instance.new("ImageButton", UI["28"])
+UI["2d"]["BorderSizePixel"] = 0
+UI["2d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["2d"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["2d"]["Image"] = [[rbxassetid://15317582625]]
+UI["2d"]["Size"] = UDim2.new(0.7, 0, 0.7, 0)
+UI["2d"]["BackgroundTransparency"] = 1
+UI["2d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["2d"]["Position"] = UDim2.new(0.5, 0, 0.5, 0)
+
+-- // StarterGui.AutoGui.Tools.1Potions.Tool \\ --
+UI["2e"] = Instance.new("ObjectValue", UI["28"])
+UI["2e"]["Name"] = [[Tool]]
 
 -- // StarterGui.AutoGui.Tools.UIListLayout \\ --
 UI["2f"] = Instance.new("UIListLayout", UI["27"])
 UI["2f"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Right
 UI["2f"]["Padding"] = UDim.new(0, 5)
-UI["2f"]["SortOrder"] = Enum.SortOrder.LayoutOrder
 UI["2f"]["FillDirection"] = Enum.FillDirection.Horizontal
+
+-- // StarterGui.AutoGui.Tools.2Pickaxe \\ --
+UI["30"] = Instance.new("Frame", UI["27"])
+UI["30"]["BorderSizePixel"] = 0
+UI["30"]["BackgroundColor3"] = Color3.fromRGB(46, 46, 46)
+UI["30"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["30"]["Size"] = UDim2.new(1, 0, 1, 0)
+UI["30"]["Position"] = UDim2.new(0, 40, 0.1, 0)
+UI["30"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["30"]["Name"] = [[2Pickaxe]]
+
+-- // StarterGui.AutoGui.Tools.2Pickaxe.UIAspectRatioConstraint \\ --
+UI["31"] = Instance.new("UIAspectRatioConstraint", UI["30"])
+UI["31"]["AspectRatio"] = 1.2
+
+-- // StarterGui.AutoGui.Tools.2Pickaxe.UICorner \\ --
+UI["32"] = Instance.new("UICorner", UI["30"])
+
+
+-- // StarterGui.AutoGui.Tools.2Pickaxe.UIStroke \\ --
+UI["33"] = Instance.new("UIStroke", UI["30"])
+UI["33"]["Thickness"] = 1.5
+UI["33"]["Color"] = Color3.fromRGB(107, 107, 107)
+
+-- // StarterGui.AutoGui.Tools.2Pickaxe.ImageButton \\ --
+UI["34"] = Instance.new("ImageButton", UI["30"])
+UI["34"]["BorderSizePixel"] = 0
+UI["34"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["34"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["34"]["Image"] = [[rbxassetid://15317582625]]
+UI["34"]["Size"] = UDim2.new(0.7, 0, 0.7, 0)
+UI["34"]["BackgroundTransparency"] = 1
+UI["34"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["34"]["Position"] = UDim2.new(0.5, 0, 0.5, 0)
+
+-- // StarterGui.AutoGui.Tools.2Pickaxe.Tool \\ --
+UI["35"] = Instance.new("ObjectValue", UI["30"])
+UI["35"]["Name"] = [[Tool]]
+
+-- // StarterGui.AutoGui.Tools.2Pickaxe.Eq \\ --
+UI["36"] = Instance.new("BoolValue", UI["30"])
+UI["36"]["Name"] = [[Eq]]
 
 -- Require G2L wrapper
 local G2L_REQUIRE = require;
@@ -497,7 +539,13 @@ local function SCRIPT_4()
 		["bow"] = script.Parent:WaitForChild("BowSpeed"):WaitForChild("Speed"),
 		["axe"] = script.Parent:WaitForChild("AxeSpeed"):WaitForChild("Speed"),
 	}
-
+	local function updateColors_setFrame(frame:Frame,v)
+		if v then
+			game.TweenService:Create(frame.UIStroke,TweenInfo.new(.5),{Color = D.ColorOn}):Play()
+		else
+			game.TweenService:Create(frame.UIStroke,TweenInfo.new(.5),{Color = D.ColorOff}):Play()
+		end
+	end
 	-- set eqtool
 	task.spawn(function()
 		local p = game.Players.LocalPlayer
@@ -550,7 +598,146 @@ local function SCRIPT_4()
 			hold = false
 		end)
 	end)
+	-- setting toolsBtn 
+	task.spawn(function()
+		while wait() do
+			local toolsFrame = script.Parent:WaitForChild("Tools")
+			local potions = {}
+			-- get all tools on the player
+			allStuff = {}
+			for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+				table.insert(allStuff,v)
+			end
+			if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+				table.insert(allStuff,game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"))
+			end
 
+			for i,child in pairs(allStuff) do
+				if child:IsA("Tool") then
+					-- getting potions
+					if child:FindFirstChild("drink") then
+						table.insert(potions,child)
+					elseif child.Name == "Shield" then
+						table.insert(potions,child)
+					end
+					-- getting pickaxe
+					if child.Name == "Axe" then
+						toolsFrame:WaitForChild("2Pickaxe"):WaitForChild("Tool").Value = child
+					end
+
+					for i,v in pairs(potions) do
+						print("changed")
+						if #potions ~= 0 then
+
+							if potions[1] == nil then
+								repeat wait() 
+									table.remove(potions,1)
+								until potions[1] ~= nil									
+							end
+							toolsFrame:WaitForChild("1Potions"):WaitForChild("Tool").Value = potions[1]
+						else
+							toolsFrame:WaitForChild("1Potions").Visible = false
+
+						end
+					end
+					if toolsFrame:WaitForChild("1Potions"):WaitForChild("Tool").Value == nil then
+						toolsFrame:WaitForChild("1Potions").Visible = false
+					else
+						toolsFrame:WaitForChild("1Potions").Visible = true
+					end
+					if toolsFrame:WaitForChild("2Pickaxe"):WaitForChild("Tool").Value == nil then
+						toolsFrame:WaitForChild("2Pickaxe").Visible = false
+					else
+						toolsFrame:WaitForChild("2Pickaxe").Visible = true
+					end
+				end
+			end
+		end
+	end)
+	-- change images logo 
+	task.spawn(function()
+		local toolsFrame = script.Parent:WaitForChild("Tools")
+		while wait() do
+			for i,v in pairs(toolsFrame:GetChildren()) do
+				local btn:ImageButton = v:WaitForChild("ImageButton")
+				if v:IsA("Frame") then 
+					if v:WaitForChild("Tool") ~= nil then
+						btn.Image = v.Value.TextureId
+					else
+						v.Visible = false
+					end
+				end
+			end
+		end
+
+	end)
+
+	-- function toolsBtns values
+	task.spawn(function()
+		local toolsFrame = script.Parent:WaitForChild("Tools")
+		-- get eq tool value and reset the colors
+		local eq = script.Parent:WaitForChild("eqTool")
+		eq.Changed:Connect(function()
+			for i,v in pairs(toolsFrame:GetChildren()) do
+				if v:IsA("Frame") then 
+					local booleanEqFrame:BoolValue = v:WaitForChild("Eq")
+					if eq.Value == v:WaitForChild("Tool").Value then
+						booleanEqFrame.Value = true
+						updateColors_setFrame(v,booleanEqFrame.Value)
+					else
+						booleanEqFrame.Value = false
+						updateColors_setFrame(v,booleanEqFrame.Value)
+					end
+				end
+			end
+		end)
+		for i,v in pairs(toolsFrame:GetChildren()) do
+			if v:IsA("Frame") then
+				-- loop update values
+				local btn:ImageButton = v:WaitForChild("ImageButton")
+				local eq:BoolValue = v:WaitForChild("Eq")
+				v:WaitForChild("Tool").Changed:Connect(function() -- changeStuff
+					if v:WaitForChild("Tool") ~= nil then
+						btn.Image = v.Value.TextureId
+					else
+						v.Visible = true
+					end
+				end)
+				btn.MouseButton1Down:Connect(function()
+					if v:WaitForChild("Tool").Value == nil then
+						v.Visible = false
+						return
+					end
+					if eq.Value == false then
+						for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+							if v:IsA("Tool") then
+								v.Parent = game.Players.LocalPlayer.Backpack
+							end
+						end
+						v:WaitForChild("Tool").Value.Parent = game.Players.LocalPlayer.Character
+						eq.Value = true
+						updateColors_setFrame(v,eq.Value)
+					else
+						if v:WaitForChild("Tool").Value.Parent == game.Players.LocalPlayer.Character then
+
+							v:WaitForChild("Tool").Value.Parent = game.Players.LocalPlayer.Backpack
+							eq.Value = false
+							updateColors_setFrame(v,eq.Value)
+						else
+							for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+								if v:IsA("Tool") then
+									v.Parent = game.Players.LocalPlayer.Backpack
+								end
+							end
+							v:WaitForChild("Tool").Value.Parent = game.Players.LocalPlayer.Character
+							eq.Value = true
+							updateColors_setFrame(v,eq.Value)
+						end
+					end
+				end)
+			end
+		end
+	end)
 	-- Do auto true or false
 	task.spawn(function()
 		auto.F.MouseButton1Down:Connect(function()
@@ -649,7 +836,6 @@ local function SCRIPT_4()
 			task.wait()
 		end
 	end)
-
 end
 task.spawn(SCRIPT_4)
 
