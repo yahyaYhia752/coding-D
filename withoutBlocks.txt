@@ -7,16 +7,10 @@ if _G.AutoClickerStart_Welp then
 end
 _G.AutoClickerStart_Welp = true
 local touchGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("TouchGui")
-for i,v in pairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
-	if v:FindFirstChild("TouchControlFrame") then
-	else
-		touchGui = v
-	end
-end
+
 if touchGui then
 	print(touchGui)
 	touchGui.Name = "touchGui-oof"
-	touchGui.Enabled = false
 end
 --fix auto blocks
 task.spawn(function()
