@@ -25,9 +25,9 @@ task.spawn(function()
 end)
 game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	local prefix = "/e"
-	local cmd = "code"
+	local cmd = "cmd"
 	local argsMsg = msg:split(" ")
-	if argsMsg[1] == prefix and argsMsg[2]:lower() == "cmd" then
+	if argsMsg[1] == prefix and argsMsg[2]:lower() == cmd then
 		local args = {
 			[1] = argsMsg[3]:lower()
 		}
