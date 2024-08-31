@@ -655,7 +655,6 @@ local function SCRIPT_4()
 					end
 
 					for i,v in pairs(potions) do
-						print("changed")
 						if #potions ~= 0 then
 
 							if potions[1] == nil then
