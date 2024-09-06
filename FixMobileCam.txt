@@ -1,4 +1,4 @@
-if X or Y then
+if X and Y then
 else
 	X = 1
 	Y = 1
