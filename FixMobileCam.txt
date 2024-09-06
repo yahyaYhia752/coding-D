@@ -1,0 +1,40 @@
+local UIS = game:GetService("UserInputService")
+local player = game.Players.LocalPlayer
+local camera = workspace.CurrentCamera
+if _G.TouchForMoblieEnable then
+	X = game.Players.LocalPlayer.PlayerGui.sensitivityX.Value
+	Y = game.Players.LocalPlayer.PlayerGui.sensitivityY.Value
+else
+	local sensitivityX = Instance.new("NumberValue",game.Players.LocalPlayer.PlayerGui)
+	sensitivityX.Name = "sensitivityX"
+	local sensitivityY = Instance.new("NumberValue",game.Players.LocalPlayer.PlayerGui)
+	sensitivityY.Name = "sensitivityY"
+	sensitivityX.Value = X
+	sensitivityX.Value = Y
+end
+if _G.TouchForMoblieEnable then
+	else
+	if UIS.TouchEnabled then
+		local lastPosition = nil
+
+		UIS.TouchMoved:Connect(function(touch, gameProcessed)
+			if not gameProcessed then
+				if lastPosition then
+					local delta = touch.Position - lastPosition
+
+					local newCFrameX = CFrame.Angles(0, -delta.X * 0.01 * sensitivityX.Value, 0)
+
+					local newCFrameY = CFrame.Angles(-delta.Y * 0.01 * sensitivityY.Value, 0, 0)
+
+					camera.CFrame = camera.CFrame * newCFrameX * newCFrameY
+				end
+				lastPosition = touch.Position
+			end
+		end)
+
+		UIS.TouchEnded:Connect(function()
+			lastPosition = nil  -- Reset the last touch position when touch ends
+		end)
+		_G.TouchForMoblieEnable = true
+	end
+end
