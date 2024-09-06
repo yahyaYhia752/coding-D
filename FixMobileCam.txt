@@ -1,3 +1,9 @@
+if X or Y then
+else
+	X = 1
+	Y = 1
+end
+
 local UIS = game:GetService("UserInputService")
 local player = game.Players.LocalPlayer
 local camera = workspace.CurrentCamera
@@ -13,7 +19,7 @@ else
 	sensitivityX.Value = Y
 end
 if _G.TouchForMoblieEnable then
-	else
+else
 	if UIS.TouchEnabled then
 		local lastPosition = nil
 
