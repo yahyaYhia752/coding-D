@@ -1,46 +1,162 @@
-if X and Y then
-else
-	X = 1
-	Y = 1
-end
+-- // GUI TO LUA \\ --
 
-local UIS = game:GetService("UserInputService")
-local player = game.Players.LocalPlayer
-local camera = workspace.CurrentCamera
-if _G.TouchForMoblieEnable then
-	X = game.Players.LocalPlayer.PlayerGui.sensitivityX.Value
-	Y = game.Players.LocalPlayer.PlayerGui.sensitivityY.Value
-else
-	local sensitivityX = Instance.new("NumberValue",game.Players.LocalPlayer.PlayerGui)
-	sensitivityX.Name = "sensitivityX"
-	local sensitivityY = Instance.new("NumberValue",game.Players.LocalPlayer.PlayerGui)
-	sensitivityY.Name = "sensitivityY"
-	sensitivityX.Value = X
-	sensitivityX.Value = Y
-end
-if _G.TouchForMoblieEnable then
-else
-	if UIS.TouchEnabled then
-		local lastPosition = nil
+-- // INSTANCES: 8 | SCRIPTS: 3 | MODULES: 0 \\ --
 
-		UIS.TouchMoved:Connect(function(touch, gameProcessed)
-			if not gameProcessed then
-				if lastPosition then
-					local delta = touch.Position - lastPosition
+local UI = {}
 
-					local newCFrameX = CFrame.Angles(0, -delta.X * 0.01 * sensitivityX.Value, 0)
+-- // StarterGui.SpeedTouch \\ --
+UI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
+UI["1"]["Enabled"] = true
+UI["1"]["Name"] = [[SpeedTouch]]
+UI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
 
-					local newCFrameY = CFrame.Angles(-delta.Y * 0.01 * sensitivityY.Value, 0, 0)
+-- // StarterGui.SpeedTouch.LocalScript \\ --
+UI["2"] = Instance.new("LocalScript", UI["1"])
 
-					camera.CFrame = camera.CFrame * newCFrameX * newCFrameY
+
+-- // StarterGui.SpeedTouch.X \\ --
+UI["3"] = Instance.new("Frame", UI["1"])
+UI["3"]["BorderSizePixel"] = 0
+UI["3"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["3"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["3"]["Size"] = UDim2.new(0, 50, 0, 50)
+UI["3"]["Position"] = UDim2.new(0.4, 0, 0.2, 0)
+UI["3"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["3"]["Name"] = [[X]]
+UI["3"]["BackgroundTransparency"] = 1
+
+-- // StarterGui.SpeedTouch.X.TextBox \\ --
+UI["4"] = Instance.new("TextBox", UI["3"])
+UI["4"]["CursorPosition"] = -1
+UI["4"]["TextColor3"] = Color3.fromRGB(0, 0, 0)
+UI["4"]["BorderSizePixel"] = 0
+UI["4"]["TextSize"] = 14
+UI["4"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["4"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["4"]["Size"] = UDim2.new(1, 0, 1, 0)
+UI["4"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["4"]["Text"] = [[X]]
+
+-- // StarterGui.SpeedTouch.X.TextBox.LocalScript \\ --
+UI["5"] = Instance.new("LocalScript", UI["4"])
+
+
+-- // StarterGui.SpeedTouch.Y \\ --
+UI["6"] = Instance.new("Frame", UI["1"])
+UI["6"]["BorderSizePixel"] = 0
+UI["6"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["6"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["6"]["Size"] = UDim2.new(0, 50, 0, 50)
+UI["6"]["Position"] = UDim2.new(0.6, 0, 0.2, 0)
+UI["6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["6"]["Name"] = [[Y]]
+UI["6"]["BackgroundTransparency"] = 1
+
+-- // StarterGui.SpeedTouch.Y.TextBox \\ --
+UI["7"] = Instance.new("TextBox", UI["6"])
+UI["7"]["TextColor3"] = Color3.fromRGB(0, 0, 0)
+UI["7"]["BorderSizePixel"] = 0
+UI["7"]["TextSize"] = 14
+UI["7"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["7"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["7"]["Size"] = UDim2.new(1, 0, 1, 0)
+UI["7"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["7"]["Text"] = [[X]]
+
+-- // StarterGui.SpeedTouch.Y.TextBox.LocalScript \\ --
+UI["8"] = Instance.new("LocalScript", UI["7"])
+
+
+-- // StarterGui.SpeedTouch.LocalScript \\ --
+local function SCRIPT_2()
+local script = UI["2"]
+	local UIS = game:GetService("UserInputService")
+	local player = game.Players.LocalPlayer
+	local camera = workspace.CurrentCamera
+	local sensitivityX
+	local sensitivityY
+	if _G.TouchForMoblieEnable then
+		--game.Players.LocalPlayer.PlayerGui.sensitivityX.Value = X
+		--game.Players.LocalPlayer.PlayerGui.sensitivityY.Value = Y
+	else
+		
+		sensitivityX = Instance.new("NumberValue",game.Players.LocalPlayer.PlayerGui)
+		sensitivityX.Name = "sensitivityX"
+		
+		sensitivityY = Instance.new("NumberValue",game.Players.LocalPlayer.PlayerGui)
+		sensitivityY.Name = "sensitivityY"
+		
+	end
+	repeat wait() until sensitivityX.Value > 0 and sensitivityY.Value > 0
+	print("Start !")
+	
+	if _G.TouchForMoblieEnable then
+	else
+		if UIS.TouchEnabled then
+			local lastPosition = nil
+			UIS.TouchMoved:Connect(function(touch, gameProcessed)
+				if not gameProcessed then
+					if lastPosition then
+						local delta = touch.Position - lastPosition
+	
+						local newCFrameX = CFrame.Angles(0, -delta.X * 0.01 * sensitivityX.Value, 0)
+	
+						local newCFrameY = CFrame.Angles(-delta.Y * 0.01 * sensitivityY.Value, 0, 0)
+	
+						camera.CFrame = camera.CFrame * newCFrameX * newCFrameY
+					end
+					lastPosition = touch.Position
 				end
-				lastPosition = touch.Position
-			end
-		end)
-
-		UIS.TouchEnded:Connect(function()
-			lastPosition = nil  -- Reset the last touch position when touch ends
-		end)
-		_G.TouchForMoblieEnable = true
+			end)
+	
+			UIS.TouchEnded:Connect(function()
+				lastPosition = nil  -- Reset the last touch position when touch ends
+			end)
+			_G.TouchForMoblieEnable = true
+			print("Script Loaded")
+		end
 	end
 end
+task.spawn(SCRIPT_2)
+-- // StarterGui.SpeedTouch.X.TextBox.LocalScript \\ --
+local function SCRIPT_5()
+local script = UI["5"]
+	script.Parent.Text = script.Parent.Parent.Name
+	script.Parent.FocusLost:Connect(function()
+		if tonumber(script.Parent.Text) == nil then
+			script.Parent.Text = "لازم رقم"
+			if tonumber(script.Parent.Text) <=0 then
+				script.Parent.Text = "اقل من صفر"
+			end
+		else
+			if tonumber(script.Parent.Text) <=0 then
+				return nil
+			end
+			game.Players.LocalPlayer.PlayerGui:WaitForChild("sensitivity"..script.Parent.Parent.Name).Value = tonumber(script.Parent.Text)
+			script.Parent.Parent:Destroy()
+		end
+	end)
+end
+task.spawn(SCRIPT_5)
+-- // StarterGui.SpeedTouch.Y.TextBox.LocalScript \\ --
+local function SCRIPT_8()
+local script = UI["8"]
+	script.Parent.Text = script.Parent.Parent.Name
+	script.Parent.FocusLost:Connect(function()
+		if tonumber(script.Parent.Text) == nil then
+			script.Parent.Text = "لازم رقم"
+			if tonumber(script.Parent.Text) <=0 then
+				script.Parent.Text = "اقل من صفر"
+			end
+		else
+			if tonumber(script.Parent.Text) <=0 then
+				return nil
+			end
+			game.Players.LocalPlayer.PlayerGui:WaitForChild("sensitivity"..script.Parent.Parent.Name).Value = tonumber(script.Parent.Text)
+			script.Parent.Parent:Destroy()
+		end
+	end)
+end
+task.spawn(SCRIPT_8)
+
+return UI["1"], require;
