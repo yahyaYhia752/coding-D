@@ -99,9 +99,9 @@ local script = UI["2"]
 					if lastPosition then
 						local delta = touch.Position - lastPosition
 	
-						local newCFrameX = CFrame.Angles(0, -delta.X * 0.01 * sensitivityX.Value, 0)
+						local newCFrameX = CFrame.Angles(0, -delta.X * 0.01 * sensitivityX.Value/100, 0)
 	
-						local newCFrameY = CFrame.Angles(-delta.Y * 0.01 * sensitivityY.Value, 0, 0)
+						local newCFrameY = CFrame.Angles(-delta.Y * 0.01 * sensitivityY.Value/100, 0, 0)
 	
 						camera.CFrame = camera.CFrame * newCFrameX * newCFrameY
 					end
