@@ -1,5 +1,5 @@
 repeat wait() until game:IsLoaded()
-troll = {"h_killh"}
+troll = {""}
 if table.find(troll,game.Players.LocalPlayer.Name:lower()) then
 	game.Players.LocalPlayer:Kick("انطردت لانك هاك لازم تغير كلمه السر")
 end
