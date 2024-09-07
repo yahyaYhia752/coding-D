@@ -1,8 +1,5 @@
 repeat wait() until game:IsLoaded()
 troll = {""}
-if table.find(troll,game.Players.LocalPlayer.Name:lower()) then
-	game.Players.LocalPlayer:Kick("انطردت لانك هاك لازم تغير كلمه السر")
-end
 intheGame = false
 _G.Mobile_752 = false
 if _G.AutoClickerStart_Welp then
