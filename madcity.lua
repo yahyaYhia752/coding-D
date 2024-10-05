@@ -74,6 +74,11 @@ local function SCRIPT_2()
 		end
 		shift(boolValue)
 	end)
+    plr:WaitForChild("Humanoid").Died:Connect(function()
+        boolValue = false
+        zoom = false
+        shift(boolValue)
+    end)
 	game["Run Service"].RenderStepped:Connect(function()
 		cam.CFrame = cam.CFrame * ShiftLockCFrame.Value
 		-- character rotate
