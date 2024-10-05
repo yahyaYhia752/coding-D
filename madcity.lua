@@ -4,29 +4,16 @@ for i,v in pairs(game:GetDescendants()) do
 		v:Stop()
 	end
 end
--- // GUI TO LUA \\ --
+-- doing task
 if _G.ShiftLock then
-	game.Players.LocalPlayer.PlayerGui:WaitForChild("shift lock"):Destroy()
+	game.CoreGui:WaitForChild("shift lock"):Destroy()
 end
 _G.ShiftLock = true
--- // INSTANCES: 2 | SCRIPTS: 1 | MODULES: 0 \\ --
 
-local UI = {}
-
--- // StarterGui.shift lock \\ --
-UI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
-UI["1"]["Enabled"] = false
-UI["1"]["Name"] = [[shift lock]]
-UI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
-UI["1"]["ResetOnSpawn"] = false
-
--- // StarterGui.shift lock.Script \\ --
-UI["2"] = Instance.new("LocalScript", UI["1"])
-UI["2"]["Name"] = [[Script]]
-
--- // StarterGui.shift lock.Script \\ --
 local function SCRIPT_2()
-local script = UI["2"]
+    local script = Instance.new("LocalScript")
+    script.Parent = game.CoreGui
+    script.Name = "shift lock"
 
 	local blackListTools = {
 		"Phone";
@@ -60,12 +47,6 @@ local script = UI["2"]
 			game.TweenService:Create(ShiftLockCFrame,ti,{Value = CFrame.new(Vector3.new(0,0,0))}):Play()
 		end
 	end
-	--uis.InputBegan:Connect(function(k)
-	--	if k.KeyCode == input then
-	--		boolValue = not boolValue
-	--		shift(boolValue)
-	--	end
-	--end)
 	
 	char.ChildAdded:Connect(function(child)
 		if child:IsA("Tool") then
@@ -106,5 +87,3 @@ local script = UI["2"]
 	end)
 end
 task.spawn(SCRIPT_2)
-
-return UI["1"], require;
