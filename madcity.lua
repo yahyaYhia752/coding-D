@@ -6,7 +6,7 @@ for i,v in pairs(game:GetDescendants()) do
 end
 -- doing task
 if _G.ShiftLock then
-	game.CoreGui:WaitForChild("shift lock"):Destroy()
+	retrun nil
 end
 _G.ShiftLock = true
 
