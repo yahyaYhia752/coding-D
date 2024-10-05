@@ -18,7 +18,7 @@ UI["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitF
 UI["1"]["Enabled"] = false
 UI["1"]["Name"] = [[shift lock]]
 UI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
-UI["1"]["ResetOnSpawn"] = true
+UI["1"]["ResetOnSpawn"] = false
 
 -- // StarterGui.shift lock.Script \\ --
 UI["2"] = Instance.new("LocalScript", UI["1"])
