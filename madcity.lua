@@ -26,7 +26,8 @@ local blackListTools = {
 }
 local offest = Vector3.new(1.75,1,0)
 local Button2offest = Vector3.new(-.75,0,0)
-
+local dataFolder = Instance.new("Folder",game.CoreGui)
+dataFolder.Name = tostring((math.random(1,9999)*math.random(1,9999))/9999)
 local cam = workspace.CurrentCamera
 local plr = game.Players.LocalPlayer
 local char = plr.Character
@@ -43,9 +44,6 @@ ti = TweenInfo.new(.75,Enum.EasingStyle.Quint,Enum.EasingDirection.Out)
 
 
 local function shift(boolean)
-	if h.Sit == true then
-		boolean = false
-	end
 	local upv_cframe
 	if zoom then
 		upv_cframe = CFrame.new(offest+ Button2offest)
@@ -73,6 +71,12 @@ char.ChildRemoved:Connect(function(child)
 		shift(boolValue)
 	end
 end)
+h.Changed:Connect(function()
+	if h.Sit == true then
+		boolValue = false
+		shift(boolValue)
+	end
+end)
 plr:GetMouse().Button2Up:Connect(function()
 	zoom = false
 	shift(boolValue)
@@ -89,7 +93,7 @@ char:WaitForChild("Humanoid").Died:Connect(function()
 	boolValue = false
 	zoom = false
 	game.TweenService:Create(ShiftLockCFrame,ti,{Value = CFrame.new(Vector3.new(0,0,0))}):Play()
-	shift(boolValue)
+	--shift(boolValue)
 end)
 game["Run Service"].RenderStepped:Connect(function()
 	cam.CFrame = cam.CFrame * ShiftLockCFrame.Value
