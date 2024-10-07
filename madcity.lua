@@ -34,7 +34,7 @@ local uis = game.UserInputService
 local h:Humanoid = char:WaitForChild("Humanoid")
 local hrp:Part = char:WaitForChild("HumanoidRootPart")
 local ShiftLockCFrame = Instance.new("CFrameValue")
-ShiftLockCFrame.Parent = plr.PlayerGui
+ShiftLockCFrame.Parent = game.CoreGui
 ShiftLockCFrame.Name = "ShiftLockCFrame"
 boolValue = false
 zoom = false
@@ -44,7 +44,7 @@ ti = TweenInfo.new(.75,Enum.EasingStyle.Quint,Enum.EasingDirection.Out)
 
 local function shift(boolean)
 	if h.Sit == true then
-		return nil
+		boolean = false
 	end
 	local upv_cframe
 	if zoom then
@@ -88,6 +88,7 @@ end)
 char:WaitForChild("Humanoid").Died:Connect(function()
 	boolValue = false
 	zoom = false
+	game.TweenService:Create(ShiftLockCFrame,ti,{Value = CFrame.new(Vector3.new(0,0,0))}):Play()
 	shift(boolValue)
 end)
 game["Run Service"].RenderStepped:Connect(function()
