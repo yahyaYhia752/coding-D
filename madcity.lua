@@ -35,7 +35,7 @@ local uis = game.UserInputService
 local h:Humanoid = char:WaitForChild("Humanoid")
 local hrp:Part = char:WaitForChild("HumanoidRootPart")
 local ShiftLockCFrame = Instance.new("CFrameValue")
-ShiftLockCFrame.Parent = game.CoreGui
+ShiftLockCFrame.Parent = dataFolder
 ShiftLockCFrame.Name = "ShiftLockCFrame"
 boolValue = false
 zoom = false
@@ -72,6 +72,11 @@ char.ChildRemoved:Connect(function(child)
 	end
 end)
 h.Changed:Connect(function()
+	if h.Health <= 0 then -- if player is died already
+		boolValue = false
+		zoom = false
+		return nil 
+	end
 	if h.Sit == true then
 		boolValue = false
 		shift(boolValue)
@@ -89,17 +94,17 @@ plr:GetMouse().Button2Down:Connect(function()
 	end
 	shift(boolValue)
 end)
-char:WaitForChild("Humanoid").Died:Connect(function()
+h.Died:Connect(function()
 	boolValue = false
 	zoom = false
 	game.TweenService:Create(ShiftLockCFrame,ti,{Value = CFrame.new(Vector3.new(0,0,0))}):Play()
 	--shift(boolValue)
 end)
 game["Run Service"].RenderStepped:Connect(function()
-	cam.CFrame = cam.CFrame * ShiftLockCFrame.Value
+	cam.CFrame = cam.CFrame * ShiftLockCFrame.Value -- change position camera
 	-- character rotate
 	h.AutoRotate = not boolValue
-	if boolValue then
+	if boolValue then -- rotate character
 		hrp.CFrame = CFrame.new(hrp.Position,hrp.Position + cam.CFrame.LookVector * Vector3.new(1,0,1))
 		-- uis.MouseBehavior = Enum.MouseBehavior.LockCenter
 	else
