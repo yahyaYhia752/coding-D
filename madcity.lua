@@ -11,7 +11,7 @@ end
 _G.ShiftLock = true
 
 local function SCRIPT_2()
-	local script = Instance.new("LocalScript")
+	script = Instance.new("LocalScript")
 	script.Parent = game.CoreGui
 	script.Name = "shift lock"
 	-- waiting other loading
