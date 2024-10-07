@@ -6,21 +6,21 @@ for i,v in pairs(game:GetDescendants()) do
 end
 -- doing task
 if _G.ShiftLock then
-	retrun nil
+	return nil
 end
 _G.ShiftLock = true
 
 local function SCRIPT_2()
-    local script = Instance.new("LocalScript")
-    script.Parent = game.CoreGui
-    script.Name = "shift lock"
+	local script = Instance.new("LocalScript")
+	script.Parent = game.CoreGui
+	script.Name = "shift lock"
 
 	local blackListTools = {
 		"Phone";
 	}
 	local offest = Vector3.new(1.75,1,0)
 	local Button2offest = Vector3.new(-.75,0,0)
-	
+
 	local cam = workspace.CurrentCamera
 	local plr = game.Players.LocalPlayer
 	local char = plr.Character
@@ -47,7 +47,7 @@ local function SCRIPT_2()
 			game.TweenService:Create(ShiftLockCFrame,ti,{Value = CFrame.new(Vector3.new(0,0,0))}):Play()
 		end
 	end
-	
+
 	char.ChildAdded:Connect(function(child)
 		if child:IsA("Tool") then
 			if table.find(blackListTools,child.Name) then return nil end
@@ -74,11 +74,11 @@ local function SCRIPT_2()
 		end
 		shift(boolValue)
 	end)
-    plr:WaitForChild("Humanoid").Died:Connect(function()
-        boolValue = false
-        zoom = false
-        shift(boolValue)
-    end)
+	plr:WaitForChild("Humanoid").Died:Connect(function()
+		boolValue = false
+		zoom = false
+		shift(boolValue)
+	end)
 	game["Run Service"].RenderStepped:Connect(function()
 		cam.CFrame = cam.CFrame * ShiftLockCFrame.Value
 		-- character rotate
