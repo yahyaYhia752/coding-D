@@ -6,7 +6,7 @@ for i,v in pairs(game:GetDescendants()) do
 end
 -- doing task
 if _G.ShiftLock then
-	return
+	return nil
 end
 _G.ShiftLock = true
 
@@ -34,7 +34,7 @@ local uis = game.UserInputService
 local h:Humanoid = char:WaitForChild("Humanoid")
 local hrp:Part = char:WaitForChild("HumanoidRootPart")
 local ShiftLockCFrame = Instance.new("CFrameValue")
-ShiftLockCFrame.Parent = game.CoreGui
+ShiftLockCFrame.Parent = plr.PlayerGui
 ShiftLockCFrame.Name = "ShiftLockCFrame"
 boolValue = false
 zoom = false
@@ -43,6 +43,9 @@ ti = TweenInfo.new(.75,Enum.EasingStyle.Quint,Enum.EasingDirection.Out)
 
 
 local function shift(boolean)
+	if h.Sit == true then
+		return nil
+	end
 	local upv_cframe
 	if zoom then
 		upv_cframe = CFrame.new(offest+ Button2offest)
