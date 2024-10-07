@@ -6,7 +6,7 @@ for i,v in pairs(game:GetDescendants()) do
 end
 -- doing task
 if _G.ShiftLock then
-	retrun nil
+	return nil
 end
 _G.ShiftLock = true
 
