@@ -26,7 +26,7 @@ local blackListTools = {
 }
 local offest = Vector3.new(1.75,1,0)
 local Button2offest = Vector3.new(-.75,0,0)
-local dataFolder = Instance.new("Folder",game.CoreGui)
+local dataFolder = Instance.new("Folder",game.ReplicatedStorage)
 dataFolder.Name = tostring((math.random(1,9999)*math.random(1,9999))/9999)
 local cam = workspace.CurrentCamera
 local plr = game.Players.LocalPlayer
