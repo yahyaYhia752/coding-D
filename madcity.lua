@@ -11,9 +11,9 @@ end
 _G.ShiftLock = true
 
 --local function SCRIPT_2()
-script = Instance.new("LocalScript")
-script.Parent = game.CoreGui
-script.Name = "shift lock"
+--script = Instance.new("LocalScript")
+--script.Parent = game.CoreGui
+--script.Name = "shift lock"
 -- waiting other loading
 repeat wait() until
 game.Players.LocalPlayer
@@ -34,7 +34,7 @@ local uis = game.UserInputService
 local h:Humanoid = char:WaitForChild("Humanoid")
 local hrp:Part = char:WaitForChild("HumanoidRootPart")
 local ShiftLockCFrame = Instance.new("CFrameValue")
-ShiftLockCFrame.Parent = script
+ShiftLockCFrame.Parent = plr.PlayerGui
 ShiftLockCFrame.Name = "ShiftLockCFrame"
 boolValue = false
 zoom = false
