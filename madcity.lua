@@ -6,7 +6,7 @@ for i,v in pairs(game:GetDescendants()) do
 end
 -- doing task
 if _G.ShiftLock then
-	return nil
+	return
 end
 _G.ShiftLock = true
 
@@ -18,8 +18,8 @@ _G.ShiftLock = true
 repeat wait() until
 game.Players.LocalPlayer
 	and game.Players.LocalPlayer.Character
-	and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-	and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")	
+	and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+	and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 
 local blackListTools = {
 	"Phone";
