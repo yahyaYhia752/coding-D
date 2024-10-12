@@ -65,6 +65,8 @@ local function SCRIPT_2()
 		else
 			game.TweenService:Create(ShiftLockCFrame,ti,{Value = CFrame.new(Vector3.new(0,0,0))}):Play()
 		end
+		print(zoom)
+		print(boolValue)
 	end
 
 	char.ChildAdded:Connect(function(child)
@@ -88,8 +90,7 @@ local function SCRIPT_2()
 		end
 	end)
 	h.Changed:Connect(function()
-		print(boolValue)
-		print(zoom)
+
 		if disableScript == true then
 			return nil
 		end
