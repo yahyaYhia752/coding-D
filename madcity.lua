@@ -87,7 +87,7 @@ local function SCRIPT_2()
 		if h.Health <= 0 then -- if player is died already
 			boolValue = false
 			zoom = false
-			disableScript = true
+			--disableScript = true
 			return nil 
 		end
 		if h.Sit == true then
@@ -117,11 +117,11 @@ local function SCRIPT_2()
 		if disableScript == true then
 			return nil
 		end
-		dataFolder:Destroy()
+		--dataFolder:Destroy()
 		boolValue = false
 		zoom = false
 		game.TweenService:Create(ShiftLockCFrame,ti,{Value = CFrame.new(Vector3.new(0,0,0))}):Play()
-		disableScript = true
+		--disableScript = true
 		--shift(boolValue)
 	end)
 	game["Run Service"].RenderStepped:Connect(function()
@@ -140,6 +140,6 @@ local function SCRIPT_2()
 	end)
 end
 task.spawn(SCRIPT_2)
-game.Players.LocalPlayer.CharacterAdded:Connect(function()
-	task.spawn(SCRIPT_2)
-end)
+--game.Players.LocalPlayer.CharacterAdded:Connect(function()
+--	task.spawn(SCRIPT_2)
+--end)
