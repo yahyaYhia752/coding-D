@@ -45,10 +45,8 @@ local function SCRIPT_2()
 	input = Enum.KeyCode.LeftShift
 	ti = TweenInfo.new(.75,Enum.EasingStyle.Quint,Enum.EasingDirection.Out)
 	disableScript = false
-	local function UpdateValues()
-		cam = workspace.CurrentCamera
-		plr = game.Players.LocalPlayer
-		char = plr.Character
+	local function UpdateValues(character)
+		char = character
 		h = char:WaitForChild("Humanoid")
 		hrp = char:WaitForChild("HumanoidRootPart")
 		
@@ -147,8 +145,8 @@ local function SCRIPT_2()
 			-- uis.MouseBehavior = Enum.MouseBehavior.Default
 		end
 	end)
-	game.Players.LocalPlayer.CharacterAdded:Connect(function()
-		UpdateValues()
+	game.Players.LocalPlayer.CharacterAdded:Connect(function(newcharacter)
+		UpdateValues(newcharacter)
 	end)
 end
 task.spawn(SCRIPT_2)
