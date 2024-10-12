@@ -45,7 +45,14 @@ local function SCRIPT_2()
 	input = Enum.KeyCode.LeftShift
 	ti = TweenInfo.new(.75,Enum.EasingStyle.Quint,Enum.EasingDirection.Out)
 	disableScript = false
-
+	local function UpdateValues()
+		cam = workspace.CurrentCamera
+		plr = game.Players.LocalPlayer
+		char = plr.Character
+		h = char:WaitForChild("Humanoid")
+		hrp = char:WaitForChild("HumanoidRootPart")
+		
+	end
 	local function shift(boolean)
 		local upv_cframe
 		if zoom then
@@ -81,6 +88,8 @@ local function SCRIPT_2()
 		end
 	end)
 	h.Changed:Connect(function()
+		print(boolValue)
+		print(zoom)
 		if disableScript == true then
 			return nil
 		end
