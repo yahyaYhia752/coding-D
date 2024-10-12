@@ -127,7 +127,7 @@ local function SCRIPT_2()
 		if disableScript == true then
 			return nil
 		end
-		--dataFolder:Destroy()
+		UpdateValues()
 		boolValue = false
 		zoom = false
 		game.TweenService:Create(ShiftLockCFrame,ti,{Value = CFrame.new(Vector3.new(0,0,0))}):Play()
