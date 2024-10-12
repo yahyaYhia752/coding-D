@@ -127,7 +127,6 @@ local function SCRIPT_2()
 		if disableScript == true then
 			return nil
 		end
-		UpdateValues()
 		boolValue = false
 		zoom = false
 		game.TweenService:Create(ShiftLockCFrame,ti,{Value = CFrame.new(Vector3.new(0,0,0))}):Play()
@@ -148,8 +147,8 @@ local function SCRIPT_2()
 			-- uis.MouseBehavior = Enum.MouseBehavior.Default
 		end
 	end)
+	game.Players.LocalPlayer.CharacterAdded:Connect(function()
+		UpdateValues()
+	end)
 end
 task.spawn(SCRIPT_2)
---game.Players.LocalPlayer.CharacterAdded:Connect(function()
---	task.spawn(SCRIPT_2)
---end)
