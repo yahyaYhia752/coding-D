@@ -1,4 +1,5 @@
 -- mute sounds
+_G.RunShiftFixGlitches = false
 for i,v in pairs(game:GetDescendants()) do
 	if v:IsA("Sound") then
 		v:Stop()
@@ -104,6 +105,7 @@ local function SCRIPT_2()
 		--shift(boolValue)
 	end)
 	game["Run Service"].RenderStepped:Connect(function()
+		if dataFolder == nil then return nil end
 		cam.CFrame = cam.CFrame * ShiftLockCFrame.Value -- change position camera
 		-- character rotate
 		h.AutoRotate = not boolValue
