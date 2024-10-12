@@ -44,7 +44,7 @@ local function SCRIPT_2()
 	zoom = false
 	input = Enum.KeyCode.LeftShift
 	ti = TweenInfo.new(.75,Enum.EasingStyle.Quint,Enum.EasingDirection.Out)
-
+	disableScript = false
 
 	local function shift(boolean)
 		local upv_cframe
@@ -61,6 +61,9 @@ local function SCRIPT_2()
 	end
 
 	char.ChildAdded:Connect(function(child)
+		if disableScript == true then
+			return nil
+		end
 		if child:IsA("Tool") then
 			if table.find(blackListTools,child.Name) then return nil end
 			boolValue = true
@@ -68,6 +71,9 @@ local function SCRIPT_2()
 		end
 	end)
 	char.ChildRemoved:Connect(function(child)
+		if disableScript == true then
+			return nil
+		end
 		if child:IsA("Tool") then
 			if table.find(blackListTools,child.Name) then return nil end
 			boolValue = false
@@ -75,9 +81,13 @@ local function SCRIPT_2()
 		end
 	end)
 	h.Changed:Connect(function()
+		if disableScript == true then
+			return nil
+		end
 		if h.Health <= 0 then -- if player is died already
 			boolValue = false
 			zoom = false
+			disableScript = true
 			return nil 
 		end
 		if h.Sit == true then
@@ -86,10 +96,16 @@ local function SCRIPT_2()
 		end
 	end)
 	plr:GetMouse().Button2Up:Connect(function()
+		if disableScript == true then
+			return nil
+		end
 		zoom = false
 		shift(boolValue)
 	end)
 	plr:GetMouse().Button2Down:Connect(function()
+		if disableScript == true then
+			return nil
+		end
 		if boolValue then
 			zoom = true
 		else
@@ -98,14 +114,20 @@ local function SCRIPT_2()
 		shift(boolValue)
 	end)
 	h.Died:Connect(function()
+		if disableScript == true then
+			return nil
+		end
 		dataFolder:Destroy()
 		boolValue = false
 		zoom = false
 		game.TweenService:Create(ShiftLockCFrame,ti,{Value = CFrame.new(Vector3.new(0,0,0))}):Play()
+		disableScript = true
 		--shift(boolValue)
 	end)
 	game["Run Service"].RenderStepped:Connect(function()
-		if dataFolder == nil then return nil end
+		if disableScript == true then
+			return nil
+		end
 		cam.CFrame = cam.CFrame * ShiftLockCFrame.Value -- change position camera
 		-- character rotate
 		h.AutoRotate = not boolValue
