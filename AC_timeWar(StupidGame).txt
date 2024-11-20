@@ -1,0 +1,300 @@
+-- // GUI TO LUA \\ --
+
+-- // INSTANCES: 22 | SCRIPTS: 1 | MODULES: 0 \\ --
+
+local UI = {}
+
+-- // StarterGui.Hack \\ --
+UI["1"] = Instance.new("ScreenGui", game.CoreGui)
+UI["1"]["Name"] = [[Hack]]
+UI["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
+
+-- // StarterGui.Hack.List \\ --
+UI["2"] = Instance.new("Frame", UI["1"])
+UI["2"]["BorderSizePixel"] = 0
+UI["2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["2"]["Size"] = UDim2.new(1, 0, 0, 0)
+UI["2"]["Position"] = UDim2.new(0, 0, 0.8, 0)
+UI["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["2"]["Name"] = [[List]]
+
+-- // StarterGui.Hack.List.UIListLayout \\ --
+UI["3"] = Instance.new("UIListLayout", UI["2"])
+UI["3"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center
+UI["3"]["Padding"] = UDim.new(0, 10)
+UI["3"]["SortOrder"] = Enum.SortOrder.LayoutOrder
+UI["3"]["ItemLineAlignment"] = Enum.ItemLineAlignment.Center
+UI["3"]["FillDirection"] = Enum.FillDirection.Horizontal
+
+-- // StarterGui.Hack.List.CheckPlayers \\ --
+UI["4"] = Instance.new("Frame", UI["2"])
+UI["4"]["BorderSizePixel"] = 0
+UI["4"]["BackgroundColor3"] = Color3.fromRGB(35, 35, 35)
+UI["4"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["4"]["Size"] = UDim2.new(0, 100, 0, 50)
+UI["4"]["Position"] = UDim2.new(0.5, 0, 0.85, 0)
+UI["4"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["4"]["Name"] = [[CheckPlayers]]
+
+-- // StarterGui.Hack.List.CheckPlayers.UIStroke \\ --
+UI["5"] = Instance.new("UIStroke", UI["4"])
+UI["5"]["Thickness"] = 1.5
+UI["5"]["Color"] = Color3.fromRGB(255, 0, 0)
+
+-- // StarterGui.Hack.List.CheckPlayers.UICorner \\ --
+UI["6"] = Instance.new("UICorner", UI["4"])
+
+
+-- // StarterGui.Hack.List.CheckPlayers.TextLabel \\ --
+UI["7"] = Instance.new("TextLabel", UI["4"])
+UI["7"]["TextWrapped"] = true
+UI["7"]["BorderSizePixel"] = 0
+UI["7"]["TextScaled"] = true
+UI["7"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["7"]["TextSize"] = 25
+UI["7"]["FontFace"] = Font.new([[rbxassetid://12187365364]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["7"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+UI["7"]["BackgroundTransparency"] = 1
+UI["7"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["7"]["Size"] = UDim2.new(0.9, 0, 0.9, 0)
+UI["7"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["7"]["Text"] = [[CheckPlayers]]
+UI["7"]["Position"] = UDim2.new(0.5, 0, 0.5, 0)
+
+-- // StarterGui.Hack.List.CheckPlayers.TextLabel.UIStroke \\ --
+UI["8"] = Instance.new("UIStroke", UI["7"])
+UI["8"]["Transparency"] = 0.2
+UI["8"]["Thickness"] = 1.5
+UI["8"]["Color"] = Color3.fromRGB(140, 140, 140)
+
+-- // StarterGui.Hack.List.CheckPlayers.TextButton \\ --
+UI["9"] = Instance.new("TextButton", UI["4"])
+UI["9"]["BorderSizePixel"] = 0
+UI["9"]["TextTransparency"] = 1
+UI["9"]["TextSize"] = 14
+UI["9"]["TextColor3"] = Color3.fromRGB(0, 0, 0)
+UI["9"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["9"]["Size"] = UDim2.new(1, 0, 1, 0)
+UI["9"]["BackgroundTransparency"] = 1
+UI["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+
+-- // StarterGui.Hack.List.LocalScript \\ --
+UI["a"] = Instance.new("LocalScript", UI["2"])
+
+
+-- // StarterGui.Hack.List.Bank \\ --
+UI["b"] = Instance.new("Frame", UI["2"])
+UI["b"]["BorderSizePixel"] = 0
+UI["b"]["BackgroundColor3"] = Color3.fromRGB(35, 35, 35)
+UI["b"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["b"]["Size"] = UDim2.new(0, 100, 0, 50)
+UI["b"]["Position"] = UDim2.new(0.5, 0, 0.85, 0)
+UI["b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["b"]["Name"] = [[Bank]]
+
+-- // StarterGui.Hack.List.Bank.UIStroke \\ --
+UI["c"] = Instance.new("UIStroke", UI["b"])
+UI["c"]["Thickness"] = 1.5
+UI["c"]["Color"] = Color3.fromRGB(255, 0, 0)
+
+-- // StarterGui.Hack.List.Bank.UICorner \\ --
+UI["d"] = Instance.new("UICorner", UI["b"])
+
+
+-- // StarterGui.Hack.List.Bank.TextLabel \\ --
+UI["e"] = Instance.new("TextLabel", UI["b"])
+UI["e"]["TextWrapped"] = true
+UI["e"]["BorderSizePixel"] = 0
+UI["e"]["TextScaled"] = true
+UI["e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["e"]["TextSize"] = 25
+UI["e"]["FontFace"] = Font.new([[rbxassetid://12187365364]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["e"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+UI["e"]["BackgroundTransparency"] = 1
+UI["e"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["e"]["Size"] = UDim2.new(0.9, 0, 0.9, 0)
+UI["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["e"]["Text"] = [[AutoSave]]
+UI["e"]["Position"] = UDim2.new(0.5, 0, 0.5, 0)
+
+-- // StarterGui.Hack.List.Bank.TextLabel.UIStroke \\ --
+UI["f"] = Instance.new("UIStroke", UI["e"])
+UI["f"]["Transparency"] = 0.2
+UI["f"]["Thickness"] = 1.5
+UI["f"]["Color"] = Color3.fromRGB(140, 140, 140)
+
+-- // StarterGui.Hack.List.Bank.TextButton \\ --
+UI["10"] = Instance.new("TextButton", UI["b"])
+UI["10"]["BorderSizePixel"] = 0
+UI["10"]["TextTransparency"] = 1
+UI["10"]["TextSize"] = 14
+UI["10"]["TextColor3"] = Color3.fromRGB(0, 0, 0)
+UI["10"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["10"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["10"]["Size"] = UDim2.new(1, 0, 1, 0)
+UI["10"]["BackgroundTransparency"] = 1
+UI["10"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+
+-- // StarterGui.Hack.List.Farm \\ --
+UI["11"] = Instance.new("Frame", UI["2"])
+UI["11"]["BorderSizePixel"] = 0
+UI["11"]["BackgroundColor3"] = Color3.fromRGB(35, 35, 35)
+UI["11"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["11"]["Size"] = UDim2.new(0, 100, 0, 50)
+UI["11"]["Position"] = UDim2.new(0.5, 0, 0.85, 0)
+UI["11"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["11"]["Name"] = [[Farm]]
+
+-- // StarterGui.Hack.List.Farm.UIStroke \\ --
+UI["12"] = Instance.new("UIStroke", UI["11"])
+UI["12"]["Thickness"] = 1.5
+UI["12"]["Color"] = Color3.fromRGB(255, 0, 0)
+
+-- // StarterGui.Hack.List.Farm.UICorner \\ --
+UI["13"] = Instance.new("UICorner", UI["11"])
+
+
+-- // StarterGui.Hack.List.Farm.TextLabel \\ --
+UI["14"] = Instance.new("TextLabel", UI["11"])
+UI["14"]["TextWrapped"] = true
+UI["14"]["BorderSizePixel"] = 0
+UI["14"]["TextScaled"] = true
+UI["14"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["14"]["TextSize"] = 25
+UI["14"]["FontFace"] = Font.new([[rbxassetid://12187365364]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["14"]["TextColor3"] = Color3.fromRGB(255, 255, 255)
+UI["14"]["BackgroundTransparency"] = 1
+UI["14"]["AnchorPoint"] = Vector2.new(0.5, 0.5)
+UI["14"]["Size"] = UDim2.new(0.9, 0, 0.9, 0)
+UI["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+UI["14"]["Text"] = [[Farming]]
+UI["14"]["Position"] = UDim2.new(0.5, 0, 0.5, 0)
+
+-- // StarterGui.Hack.List.Farm.TextLabel.UIStroke \\ --
+UI["15"] = Instance.new("UIStroke", UI["14"])
+UI["15"]["Transparency"] = 0.2
+UI["15"]["Thickness"] = 1.5
+UI["15"]["Color"] = Color3.fromRGB(140, 140, 140)
+
+-- // StarterGui.Hack.List.Farm.TextButton \\ --
+UI["16"] = Instance.new("TextButton", UI["11"])
+UI["16"]["BorderSizePixel"] = 0
+UI["16"]["TextTransparency"] = 1
+UI["16"]["TextSize"] = 14
+UI["16"]["TextColor3"] = Color3.fromRGB(0, 0, 0)
+UI["16"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255)
+UI["16"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+UI["16"]["Size"] = UDim2.new(1, 0, 1, 0)
+UI["16"]["BackgroundTransparency"] = 1
+UI["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0)
+
+-- // StarterGui.Hack.List.LocalScript \\ --
+local function SCRIPT_a()
+local script = UI["a"]
+	local plr = game.Players.LocalPlayer
+	local frame = script.Parent
+	local vipPos = Vector3.new(-11, -94, 148)
+	local lobbyPos = Vector3.new(-13, -92, -26)
+	walkspeed = plr.Character:WaitForChild("Humanoid").WalkSpeed
+	_G.hackEnable = false
+    farmOnData = false
+	_G.Offline = false
+	_G.CheckPlayers = false
+	_G.AutoSave = false
+	local function CssStyle(v:boolean,btn:Frame)
+		if v then
+			game.TweenService:Create(btn:WaitForChild("UIStroke"),TweenInfo.new(.5,Enum.EasingStyle.Sine),{Color = Color3.fromRGB(0,255,0)}):Play()
+		else
+			game.TweenService:Create(btn:WaitForChild("UIStroke"),TweenInfo.new(.5,Enum.EasingStyle.Sine),{Color = Color3.fromRGB(255,0,0)}):Play()
+		end
+	end
+	
+	local function savemoney(v:number)
+		local ATMEvent_upvr = game.ReplicatedStorage:WaitForChild("ATMEvent")
+		ATMEvent_upvr:FireServer(v, "deposit")
+	end
+	local function doFarm(v:boolean)
+		if v then
+			plr.Character:WaitForChild("HumanoidRootPart").Position = vipPos
+			plr.Character:WaitForChild("Humanoid").WalkSpeed = 0
+		else
+			plr.Character:WaitForChild("HumanoidRootPart").Position = plr.Character:WaitForChild("Torso").Position or plr.Character:WaitForChild("UpperTorso").Position
+			plr.Character:WaitForChild("Humanoid").WalkSpeed = walkspeed
+            wait()
+            plr.Character:MoveTo(lobbyPos)
+		end
+	end
+	local function doCheck()
+		if _G.Offline == false and _G.CheckPlayers == true then -- player enable this and there is someone with player
+
+			doFarm(false)
+			CssStyle(false,frame:WaitForChild("Farm"))
+			wait()
+			plr.Character:MoveTo(lobbyPos)
+        else
+            if _G.hackEnable == true then
+                doFarm(true)
+                CssStyle(true,frame:WaitForChild("Farm"))
+            end
+		end
+	end
+	frame:WaitForChild("Farm").TextButton.MouseButton1Down:Connect(function()
+		if _G.CheckPlayers == true and _G.Offline == false then
+		else
+			_G.hackEnable = not _G.hackEnable
+			doFarm(_G.hackEnable)
+			CssStyle(_G.hackEnable,frame:WaitForChild("Farm"))
+		end
+	end)
+	task.spawn(function()
+		while wait() do
+			if _G.hackEnable then
+				doFarm(_G.hackEnable)
+			else
+				doFarm(_G.hackEnable)
+				repeat wait() until _G.hackEnable == true
+			end
+		end
+	end)
+	frame:WaitForChild("CheckPlayers"):WaitForChild("TextButton").MouseButton1Down:Connect(function()
+		_G.CheckPlayers = not _G.CheckPlayers
+		CssStyle(_G.CheckPlayers,frame:WaitForChild("CheckPlayers"))
+        if _G.CheckPlayers == true then
+    		doCheck()
+        end
+	end)
+	game.Players.PlayerAdded:Connect(function()
+        wait(1)
+		doCheck()
+	end)
+	game.Players.PlayerRemoving:Connect(function()
+        wait(1)
+		doCheck()
+	end)
+	frame:WaitForChild("Bank"):WaitForChild("TextButton").MouseButton1Down:Connect(function()
+		_G.AutoSave = not _G.AutoSave
+		CssStyle(_G.AutoSave,frame:WaitForChild("Bank"))
+	end)
+	task.spawn(function()
+		local value:IntValue = plr.leaderstats.Time
+		value.Changed:Connect(function()
+			if _G.AutoSave then
+				savemoney(value.Value)
+			end
+		end)
+	end)
+	task.spawn(function()
+		while wait() do
+			if #game.Players:GetPlayers() >=2 then -- 2 and more
+				_G.Offline = false
+			else
+				_G.Offline = true -- 1 or less mean just you
+			end
+		end
+	end)
+	
+end
+task.spawn(SCRIPT_a)
+
+return UI["1"], require;
