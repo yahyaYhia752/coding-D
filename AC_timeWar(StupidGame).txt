@@ -212,7 +212,7 @@ local script = UI["a"]
 	
 	local function savemoney(v:number)
 		local ATMEvent_upvr = game.ReplicatedStorage:WaitForChild("ATMEvent")
-		ATMEvent_upvr:FireServer(v, "deposit")
+		ATMEvent_upvr:FireServer(tostring(v), "deposit")
 	end
 	local function doFarm(v:boolean)
 		if v then
