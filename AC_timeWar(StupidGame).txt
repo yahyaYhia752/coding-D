@@ -278,12 +278,12 @@ local script = UI["a"]
 	end)
 	task.spawn(function()
 		local value:IntValue = plr.leaderstats.Time
-		value.Changed:Connect(function()
+		while wait() do
 			if _G.AutoSave then
-				wait(.1)
+				task.wait(15)
 				savemoney(value.Value)
 			end
-		end)
+		end
 	end)
 	task.spawn(function()
 		while wait() do
