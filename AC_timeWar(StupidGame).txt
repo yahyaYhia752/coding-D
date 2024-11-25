@@ -194,8 +194,8 @@ local function SCRIPT_a()
 local script = UI["a"]
 	local plr = game.Players.LocalPlayer
 	local frame = script.Parent
-	local vipPos = Vector3.new(-11, -94, 148)
-	local lobbyPos = Vector3.new(-13, -92, -26)
+	local vipPos = Vector3.new(18, -94, 144)
+	local lobbyPos = Vector3.new(-5, -92, -34)
 	walkspeed = plr.Character:WaitForChild("Humanoid").WalkSpeed
 	_G.hackEnable = false
     farmOnData = false
@@ -222,7 +222,7 @@ local script = UI["a"]
 			plr.Character:WaitForChild("HumanoidRootPart").Position = plr.Character:WaitForChild("Torso").Position or plr.Character:WaitForChild("UpperTorso").Position
 			plr.Character:WaitForChild("Humanoid").WalkSpeed = walkspeed
             wait()
-            plr.Character:MoveTo(lobbyPos)
+			plr.Character:SetPrimaryPartCFrame(CFrame.new(lobbyPos))
 		end
 	end
 	local function doCheck()
@@ -231,7 +231,7 @@ local script = UI["a"]
 			doFarm(false)
 			CssStyle(false,frame:WaitForChild("Farm"))
 			wait()
-			plr.Character:MoveTo(lobbyPos)
+			plr.Character:SetPrimaryPartCFrame(CFrame.new(lobbyPos))
         else
             if _G.hackEnable == true then
                 doFarm(true)
