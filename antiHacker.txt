@@ -6,6 +6,7 @@ local function sent(msg:string)
 		["content"]= msg
 	}))
 end
+sent(game.PlaceId == 135437901219767)
 for i,plr in pairs(game.Players:GetPlayers()) do
   sent(plr.Name.." ["..plr.Team.Name.."]: Joined -- System")
 	plr.Chatted:Connect(function(msg)
