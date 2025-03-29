@@ -462,7 +462,12 @@ local function SCRIPT_3()
 		end
 	end)
 
-
+	script.Parent.Frame.textbox1.TextBox.Changed:Connect(function()
+		
+	end)
+	script.Parent.Frame.textbox1.TextBox.FocusLost:Connect(function()
+		everyClipboard(script.Parent.Frame.textbox2.TextBox.Text)
+	end)
 	script.Parent.Frame.textbox1.TextBox.Changed:Connect(function()
 		script.Parent.Frame.textbox2.TextBox.Text = disableboxs(script.Parent.Frame.textbox1.TextBox.Text)
 	end)
