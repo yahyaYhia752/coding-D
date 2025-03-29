@@ -1,10 +1,5 @@
 
--- //mainValue\\ --
-
-_G.letter = "ٴ" -- change the letter in script
-_G.hold = .5 -- change hold time to move the screens
-_G.timeToHide = .5 -- tween time if u want fast or slow by secends
-_G.SizeFillterScreen = .9 -- change size screen and set it 
+-- //mainValue\\ -- 
 --[[
 objects:
 
